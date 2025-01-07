@@ -25,17 +25,18 @@ import android.os.Build;
 public class AppConstants {
 
 	private AppConstants() {}
-	static {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-			PENDING_INTENT_FLAGS = PendingIntent.FLAG_IMMUTABLE;
-		} else {
-			PENDING_INTENT_FLAGS = 0;
-		}
-	}
 
-	public static final int PENDING_INTENT_FLAGS;
+	public static final int PENDING_INTENT_FLAGS = PendingIntent.FLAG_IMMUTABLE;
 
-	public static final String REQUESTS_RECEIVER = "dmitriy.ponomarenko.ua@gmail.com";
+//	static {
+//		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//			PENDING_INTENT_FLAGS = PendingIntent.FLAG_IMMUTABLE;
+//		} else {
+//			PENDING_INTENT_FLAGS = 0;
+//		}
+//	}
+
+	public static final String REQUESTS_RECEIVER = "ptdno1studio@gmail.com";
 
 	public static final String APPLICATION_NAME = "AudioRecorder";
 	public static final String RECORDS_DIR = "records";

@@ -27,7 +27,7 @@ import com.dimowner.audiorecorder.AppConstants;
  */
 public class PrefsImpl implements Prefs {
 
-	private static final String PREF_NAME = "com.dimowner.audiorecorder.data.PrefsImpl";
+	public static final String PREF_NAME = "com.ptdstudio.audiorecorder.data.PrefsImpl";
 
 	private static final String PREF_KEY_IS_FIRST_RUN = "is_first_run";
 	private static final String PREF_KEY_IS_MIGRATED = "is_migrated";
@@ -46,6 +46,7 @@ public class PrefsImpl implements Prefs {
 	private static final String PREF_KEY_NAMING_FORMAT = "pref_naming_format";
 	private static final String PREF_KEY_LAST_PUBLIC_STORAGE_MIGRATION_ASKED = "pref_last_public_storage_migration_asked";
 	private static final String PREF_KEY_IS_PUBLIC_STORAGE_MIGRATED = "pref_is_public_storage_migrated";
+	private static final String PREF_KEY_INTERNAL_AUDIO = "pref_internal_audio";
 
 	//Recording prefs.
 	private static final String PREF_KEY_RECORD_CHANNEL_COUNT = "record_channel_count";
@@ -74,6 +75,18 @@ public class PrefsImpl implements Prefs {
 			}
 		}
 		return instance;
+	}
+
+	@Override
+	public boolean isInternalAudio() {
+		return sharedPreferences.getBoolean(PREF_KEY_INTERNAL_AUDIO, true);
+	}
+
+	@Override
+	public void setInternalAudio(boolean internalAudio) {
+		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putBoolean(PREF_KEY_INTERNAL_AUDIO, internalAudio);
+		editor.apply();
 	}
 
 	@Override
@@ -114,7 +127,7 @@ public class PrefsImpl implements Prefs {
 
 	@Override
 	public boolean isAskToRenameAfterStopRecording() {
-		return sharedPreferences.contains(PREF_KEY_IS_ASK_TO_RENAME_AFTER_STOP_RECORDING) && sharedPreferences.getBoolean(PREF_KEY_IS_ASK_TO_RENAME_AFTER_STOP_RECORDING, true);
+		return /*sharedPreferences.contains(PREF_KEY_IS_ASK_TO_RENAME_AFTER_STOP_RECORDING) &&*/ sharedPreferences.getBoolean(PREF_KEY_IS_ASK_TO_RENAME_AFTER_STOP_RECORDING, false);
 	}
 
 	@Override
@@ -398,9 +411,11 @@ public class PrefsImpl implements Prefs {
 	@Override
 	public void resetSettings() {
 		SharedPreferences.Editor editor = sharedPreferences.edit();
+		editor.putBoolean(PREF_KEY_INTERNAL_AUDIO, true);
+		editor.putString(PREF_KEY_SETTING_RECORDING_FORMAT, AppConstants.FORMAT_WAV);
 //		editor.putString(PREF_KEY_SETTING_THEME_COLOR, AppConstants.DEFAULT_THEME_COLOR);
 //		editor.putString(PREF_KEY_SETTING_NAMING_FORMAT, AppConstants.DEFAULT_NAME_FORMAT);
-		editor.putString(PREF_KEY_SETTING_RECORDING_FORMAT, AppConstants.DEFAULT_RECORDING_FORMAT);
+//		editor.putString(PREF_KEY_SETTING_RECORDING_FORMAT, AppConstants.DEFAULT_RECORDING_FORMAT);
 		editor.putInt(PREF_KEY_SETTING_SAMPLE_RATE, AppConstants.DEFAULT_RECORD_SAMPLE_RATE);
 		editor.putInt(PREF_KEY_SETTING_BITRATE, AppConstants.DEFAULT_RECORD_ENCODING_BITRATE);
 		editor.putInt(PREF_KEY_SETTING_CHANNEL_COUNT, AppConstants.DEFAULT_CHANNEL_COUNT);

@@ -78,6 +78,8 @@ import timber.log.Timber;
  */
 public class AndroidUtils {
 
+	public static boolean DEFAULT_INTERNAL = true;
+
 	//Prevent object instantiation
 	private AndroidUtils() {}
 

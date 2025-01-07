@@ -17,6 +17,7 @@
 package com.dimowner.audiorecorder.audio.recorder;
 
 import android.media.MediaRecorder;
+import android.media.projection.MediaProjection;
 import android.os.Build;
 import android.os.Handler;
 
@@ -203,5 +204,10 @@ public class AudioRecorder implements RecorderContract.Recorder {
 	@Override
 	public boolean isPaused() {
 		return isPaused.get();
+	}
+
+	@Override
+	public void setMediaProjection(MediaProjection projection) {
+
 	}
 }

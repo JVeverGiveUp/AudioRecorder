@@ -85,6 +85,9 @@ public class FileRepositoryImpl implements FileRepository {
 			case AppConstants.FORMAT_3GP:
 				recordFile = FileUtil.createFile(recordDirectory, FileUtil.addExtension(recordName, AppConstants.FORMAT_3GP));
 				break;
+			case AppConstants.FORMAT_MP3:
+					recordFile = FileUtil.createFile(recordDirectory, FileUtil.addExtension(recordName, AppConstants.FORMAT_MP3));
+					break;
 		}
 
 		if (recordFile != null) {
@@ -235,6 +238,7 @@ public class FileRepositoryImpl implements FileRepository {
 			case AppConstants.FORMAT_3GP:
 				return 1000 * (spaceBytes/(AppConstants.RECORD_ENCODING_BITRATE_12000/8));
 			case AppConstants.FORMAT_M4A:
+			case AppConstants.FORMAT_MP3:
 				return 1000 * (spaceBytes/(bitrate/8));
 			case AppConstants.FORMAT_WAV:
 				return 1000 * (spaceBytes/(sampleRate * channels * 2));

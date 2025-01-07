@@ -160,7 +160,8 @@ public class FileBrowserPresenter implements FileBrowserContract.UserActionsList
 			}
 			final List<RecordInfo> items = new ArrayList<>();
 			if (files != null) {
-				for (int i = 0; i < files.length; i++) {
+//				for (int i = 0; i < files.length; i++) {
+				for (int i = files.length - 1; i >= 0; i--) {
 					Record rec = localRepository.findRecordByPath(files[i].getAbsolutePath());
 					RecordInfo r = AudioDecoder.readRecordInfo(files[i]);
 					r.setInDatabase(rec != null);

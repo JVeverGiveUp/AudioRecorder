@@ -17,6 +17,7 @@
 package com.dimowner.audiorecorder.audio.recorder;
 
 import android.media.MediaRecorder;
+import android.media.projection.MediaProjection;
 import android.os.Build;
 import android.os.Handler;
 
@@ -33,16 +34,16 @@ import static com.dimowner.audiorecorder.AppConstants.RECORDING_VISUALIZATION_IN
 
 public class ThreeGpRecorder implements RecorderContract.Recorder {
 
-	private MediaRecorder recorder = null;
-	private File recordFile = null;
-	private long updateTime = 0;
+	protected MediaRecorder recorder = null;
+	protected File recordFile = null;
+	protected long updateTime = 0;
 	private long durationMills = 0;
 
-	private final AtomicBoolean isRecording = new AtomicBoolean(false);
-	private final AtomicBoolean isPaused = new AtomicBoolean(false);
+	protected final AtomicBoolean isRecording = new AtomicBoolean(false);
+	protected final AtomicBoolean isPaused = new AtomicBoolean(false);
 	private final Handler handler = new Handler();
 
-	private RecorderContract.RecorderCallback recorderCallback;
+	protected RecorderContract.RecorderCallback recorderCallback;
 
 	private static class RecorderSingletonHolder {
 		private static final ThreeGpRecorder singleton = new ThreeGpRecorder();
@@ -56,7 +57,7 @@ public class ThreeGpRecorder implements RecorderContract.Recorder {
 		return RecorderSingletonHolder.getSingleton();
 	}
 
-	private ThreeGpRecorder() { }
+	protected ThreeGpRecorder() { }
 
 	@Override
 	public void setRecorderCallback(RecorderContract.RecorderCallback callback) {
@@ -170,7 +171,7 @@ public class ThreeGpRecorder implements RecorderContract.Recorder {
 		}
 	}
 
-	private void scheduleRecordingTimeUpdate() {
+	protected void scheduleRecordingTimeUpdate() {
 		handler.postDelayed(() -> {
 			if (recorderCallback != null && recorder != null) {
 				try {
@@ -204,5 +205,10 @@ public class ThreeGpRecorder implements RecorderContract.Recorder {
 	@Override
 	public boolean isPaused() {
 		return isPaused.get();
+	}
+
+	@Override
+	public void setMediaProjection(MediaProjection projection) {
+
 	}
 }

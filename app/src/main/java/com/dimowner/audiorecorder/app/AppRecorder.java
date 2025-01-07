@@ -16,6 +16,8 @@
 
 package com.dimowner.audiorecorder.app;
 
+import android.media.projection.MediaProjection;
+
 import com.dimowner.audiorecorder.IntArrayList;
 import com.dimowner.audiorecorder.audio.recorder.RecorderContract;
 
@@ -36,4 +38,5 @@ public interface AppRecorder {
 	boolean isPaused();
 	File getRecordFile();
 	void release();
+	void setMediaProjection(MediaProjection mediaProjection);
 }

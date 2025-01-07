@@ -86,7 +86,8 @@ public class SettingsMapper {
 		formatsKeys = new String[] {
 				AppConstants.FORMAT_M4A,
 				AppConstants.FORMAT_WAV,
-				AppConstants.FORMAT_3GP
+				AppConstants.FORMAT_3GP,
+				AppConstants.FORMAT_MP3
 		};
 		sampleRates = resources.getStringArray(R.array.sample_rates2);
 		sampleRatesKeys = new String[] {

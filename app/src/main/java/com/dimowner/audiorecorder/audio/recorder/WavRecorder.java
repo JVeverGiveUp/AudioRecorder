@@ -19,6 +19,7 @@ package com.dimowner.audiorecorder.audio.recorder;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.media.projection.MediaProjection;
 import android.os.Handler;
 import com.dimowner.audiorecorder.AppConstants;
 import com.dimowner.audiorecorder.exception.InvalidOutputFile;
@@ -197,6 +198,11 @@ public class WavRecorder implements RecorderContract.Recorder {
 	@Override
 	public boolean isPaused() {
 		return isPaused.get();
+	}
+
+	@Override
+	public void setMediaProjection(MediaProjection projection) {
+
 	}
 
 	private void writeAudioDataToFile() {

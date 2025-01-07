@@ -17,6 +17,7 @@
 package com.dimowner.audiorecorder.app;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -28,12 +29,16 @@ import android.content.Intent;
 import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.media.RingtoneManager;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.IBinder;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import android.os.Message;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -64,12 +69,14 @@ import java.io.IOException;
 import timber.log.Timber;
 
 public class RecordingService extends Service {
+    MainActivity.CustomHandler handler;
+	public static final String EXTRA_RESULT_DATA = "extra_data";
 
-	private final static String CHANNEL_NAME = "Default";
-	private final static String CHANNEL_ID = "com.dimowner.audiorecorder.NotificationId";
+    private final static String CHANNEL_NAME = "Default";
+    private final static String CHANNEL_ID = "com.ptdstudio.audiorecorder.NotificationId";
 
-	private final static String CHANNEL_NAME_ERRORS = "Errors";
-	private final static String CHANNEL_ID_ERRORS = "com.dimowner.audiorecorder.Errors";
+    private final static String CHANNEL_NAME_ERRORS = "Errors";
+    private final static String CHANNEL_ID_ERRORS = "com.ptdstudio.audiorecorder.Errors";
 
 	public static final String EXTRAS_KEY_RECORD_PATH = "EXTRAS_KEY_RECORD_PATH";
 	public static final String ACTION_START_RECORDING_SERVICE = "ACTION_START_RECORDING_SERVICE";
@@ -200,7 +207,18 @@ public class RecordingService extends Service {
 						if (!started) {
 							startForegroundService();
 							if (intent.hasExtra(EXTRAS_KEY_RECORD_PATH)) {
-								startRecording(intent.getStringExtra(EXTRAS_KEY_RECORD_PATH));
+								if (ARApplication.getInjector().providePrefs(this).isInternalAudio()) {
+	                                MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) getApplicationContext().getSystemService(MEDIA_PROJECTION_SERVICE);
+	                                MediaProjection mediaProjection = mediaProjectionManager.getMediaProjection(Activity.RESULT_OK, intent.getParcelableExtra(EXTRA_RESULT_DATA));
+	                                appRecorder.setMediaProjection(mediaProjection);
+	                                Message msg = new Message();
+	                                msg.what = 1;
+	                                handler = new MainActivity.CustomHandler(this, intent.getStringExtra(EXTRAS_KEY_RECORD_PATH));
+	                                //handler.sendMessage(msg);
+	                                handler.sendMessageDelayed(msg, 100);
+	                            } else {
+	                                startRecording(intent.getStringExtra(EXTRAS_KEY_RECORD_PATH));
+	                            }
 							} else {
 								showError(ErrorParser.parseException(new RecorderInitException()));
 								stopForegroundService();
@@ -414,10 +432,10 @@ public class RecordingService extends Service {
 		}
 	}
 
-	private void startRecording(String path) {
-		appRecorder.setRecorder(recorder);
-		try {
-			if (fileRepository.hasAvailableSpace(getApplicationContext())) {
+    public void startRecording(String path) {
+        appRecorder.setRecorder(recorder);
+        try {
+            if (fileRepository.hasAvailableSpace(getApplicationContext())) {
 //				if (appRecorder.isPaused()) {
 //					appRecorder.resumeRecording();
 //				} else

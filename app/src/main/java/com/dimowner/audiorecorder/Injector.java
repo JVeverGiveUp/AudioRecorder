@@ -53,6 +53,7 @@ import com.dimowner.audiorecorder.app.records.RecordsPresenter;
 import com.dimowner.audiorecorder.app.settings.SettingsContract;
 import com.dimowner.audiorecorder.app.settings.SettingsPresenter;
 import com.dimowner.audiorecorder.data.database.TrashDataSource;
+import com.ptdstudio.internalsoundrecorder.audio.recorder.InternalMp3Recorder;
 
 public class Injector {
 
@@ -159,6 +160,15 @@ public class Injector {
 	}
 
 	public RecorderContract.Recorder provideAudioRecorder(Context context) {
+		if(providePrefs().isInternalAudio()){
+			switch (providePrefs().getSettingRecordingFormat()) {
+				default:
+				case AppConstants.FORMAT_WAV:
+					return InternalWavRecorder.getInstance();
+				case AppConstants.FORMAT_MP3:
+					return InternalMp3Recorder.getInstance();
+			}
+		}
 		switch (providePrefs(context).getSettingRecordingFormat()) {
 			default:
 			case AppConstants.FORMAT_M4A:
@@ -167,6 +177,8 @@ public class Injector {
 				return WavRecorder.getInstance();
 			case AppConstants.FORMAT_3GP:
 				return ThreeGpRecorder.getInstance();
+			case AppConstants.FORMAT_MP3:
+				return Mp3Recorder.getInstance();
 		}
 	}
 

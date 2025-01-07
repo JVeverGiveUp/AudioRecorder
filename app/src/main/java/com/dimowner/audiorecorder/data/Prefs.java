@@ -18,6 +18,8 @@ package com.dimowner.audiorecorder.data;
 
 public interface Prefs {
 
+	boolean isInternalAudio();
+	void setInternalAudio(boolean internalAudio);
 	boolean isFirstRun();
 	void firstRunExecuted();
 

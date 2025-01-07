@@ -16,6 +16,8 @@
 
 package com.dimowner.audiorecorder.audio.recorder;
 
+import android.media.projection.MediaProjection;
+
 import com.dimowner.audiorecorder.exception.AppException;
 
 import java.io.File;
@@ -39,5 +41,6 @@ public interface RecorderContract {
 		void stopRecording();
 		boolean isRecording();
 		boolean isPaused();
+		void setMediaProjection(MediaProjection projection);
 	}
 }

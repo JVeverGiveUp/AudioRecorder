@@ -116,7 +116,7 @@ public class MainPresenter implements MainContract.UserActionsListener {
 			migrateDb3();
 		}
 		if (!prefs.hasAskToRenameAfterStopRecordingSetting()) {
-			prefs.setAskToRenameAfterStopRecording(true);
+			prefs.setAskToRenameAfterStopRecording(false);
 		}
 
 		if (appRecorderCallback == null) {
@@ -692,6 +692,7 @@ public class MainPresenter implements MainContract.UserActionsListener {
 				switch (format) {
 					case AppConstants.FORMAT_M4A:
 					case AppConstants.FORMAT_WAV:
+					case AppConstants.FORMAT_MP3:
 						view.showInformation(settingsMapper.formatSize(size) + AppConstants.SEPARATOR
 								+ settingsMapper.convertFormatsToString(format) + AppConstants.SEPARATOR
 								+ settingsMapper.convertSampleRateToString(sampleRate)
