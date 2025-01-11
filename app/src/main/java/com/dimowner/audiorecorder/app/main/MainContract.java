@@ -138,5 +138,7 @@ public interface MainContract {
 		void disablePlaybackProgressListener();
 
 		void enablePlaybackProgressListener();
+
+		boolean isRecording();
 	}
 }

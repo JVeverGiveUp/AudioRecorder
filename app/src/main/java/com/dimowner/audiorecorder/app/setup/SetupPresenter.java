@@ -256,4 +256,12 @@ public class SetupPresenter implements SetupContract.UserActionsListener {
 				return 0;
 		}
 	}
+
+	@Override
+	public void setInternalSource(boolean isInternalAdio) {
+		prefs.setInternalAudio(isInternalAdio);
+		if(view != null)
+			view.updateInternalView(isInternalAdio);
+	}
+
 }

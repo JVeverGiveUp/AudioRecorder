@@ -19,11 +19,14 @@ package com.dimowner.audiorecorder.app.setup;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ import com.dimowner.audiorecorder.app.main.MainActivity;
 import com.dimowner.audiorecorder.app.settings.AppSpinnerAdapter;
 import com.dimowner.audiorecorder.app.settings.SettingsMapper;
 import com.dimowner.audiorecorder.app.widget.SettingView;
+import com.dimowner.audiorecorder.data.Prefs;
 import com.dimowner.audiorecorder.util.AndroidUtils;
 import com.dimowner.audiorecorder.util.FileUtil;
 
@@ -51,6 +55,8 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 	private SettingView channelsSetting;
 	private TextView txtInformation;
 	private TextView txtSizePerMin;
+	private TextView txtProNotice;
+	private Switch swInternalAudio;
 
 	private SetupContract.UserActionsListener presenter;
 	private ColorMap colorMap;
@@ -62,6 +68,8 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 		return intent;
 	}
 
+	private String[] formats;
+	private String[] formatsKeys;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		colorMap = ARApplication.getInjector().provideColorMap(getApplicationContext());
@@ -78,6 +86,7 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 
 		txtInformation = findViewById(R.id.txt_information);
 		txtSizePerMin = findViewById(R.id.txt_size_per_min);
+		txtProNotice = findViewById(R.id.txt_premium_notice);
 
 		Button btnApply = findViewById(R.id.btn_apply);
 		Button btnReset = findViewById(R.id.btn_reset);
@@ -88,13 +97,15 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 //		ViewGroup.LayoutParams params = space.getLayoutParams();
 //		params.height = AndroidUtils.getNavigationBarHeight(getApplicationContext());
 //		space.setLayoutParams(params);
+		swInternalAudio = findViewById(R.id.swIsInternalAudio);
 
 		formatSetting = findViewById(R.id.setting_recording_format);
-		final String[] formats = getResources().getStringArray(R.array.formats2);
-		final String[] formatsKeys = new String[] {
+		formats = getResources().getStringArray(R.array.formats2);
+		formatsKeys = new String[] {
 				AppConstants.FORMAT_M4A,
 				AppConstants.FORMAT_WAV,
-				AppConstants.FORMAT_3GP
+				AppConstants.FORMAT_3GP,
+				AppConstants.FORMAT_MP3
 		};
 		formatSetting.setData(formats, formatsKeys);
 		formatSetting.setOnChipCheckListener((key, name, checked) -> presenter.setSettingRecordingFormat(key));
@@ -224,7 +235,59 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 		super.onStart();
 		presenter.bindView(this);
 		presenter.loadSettings();
+		Prefs prefs = ARApplication.getInjector().providePrefs(getApplicationContext());
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+
+			swInternalAudio.setOnCheckedChangeListener(internalAudioListener);
+			swInternalAudio.setChecked(prefs.isInternalAudio());
+
+		}else{
+			View holder = findViewById(R.id.holderInternalAudio);
+			holder.setVisibility(View.GONE);
+			prefs.setInternalAudio(false);
+		}
 	}
+
+	private final CompoundButton.OnCheckedChangeListener internalAudioListener = new CompoundButton.OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton btn, boolean isChecked) {
+			Prefs prefs = ARApplication.getInjector().providePrefs(getApplicationContext());
+			prefs.setInternalAudio(isChecked);
+			if (isChecked) {
+				formatSetting.removeChip(formatsKeys);
+				formatSetting.addChip(new String[]{formatsKeys[1], formatsKeys[3]}, new String[]{formats[1], formats[3]});
+				//btnReset.setVisibility(View.GONE);
+				if(formatSetting.getSelected() == null){
+					String prefFormatKey = prefs.getSettingRecordingFormat();
+					if(prefFormatKey.equals(formatsKeys[1]) || prefFormatKey.equals(formatsKeys[3])){
+						formatSetting.setSelected(prefs.getSettingRecordingFormat());
+						prefs.setSettingRecordingFormat(prefs.getSettingRecordingFormat());
+					}else {
+						formatSetting.setSelected(formatsKeys[1]);
+						prefs.setSettingRecordingFormat(formatsKeys[1]);
+					}
+				}
+				if(!ARApplication.Companion.getInstance().getProVersionManager().isAllFeatures()){
+					sampleRateSetting.setEnabled(false);
+					bitrateSetting.setEnabled(false);
+					channelsSetting.setEnabled(false);
+					txtProNotice.setVisibility(View.VISIBLE);
+				}
+			} else {
+				sampleRateSetting.setEnabled(true);
+				bitrateSetting.setEnabled(true);
+				channelsSetting.setEnabled(true);
+				txtProNotice.setVisibility(View.GONE);
+
+				//btnReset.setVisibility(View.VISIBLE);
+				formatSetting.removeChip(formatsKeys);
+				formatSetting.addChip(formatsKeys, formats);
+				formatSetting.setSelected(prefs.getSettingRecordingFormat());
+
+			}
+			updateRecordingInfo(prefs.getSettingRecordingFormat());
+		}
+	};
 
 	@Override
 	protected void onStop() {
@@ -244,6 +307,11 @@ public class SetupActivity extends Activity implements SetupContract.View, View.
 	public void onBackPressed() {
 		super.onBackPressed();
 		ARApplication.getInjector().releaseSetupPresenter();
+	}
+
+	@Override
+	public void updateInternalView(boolean isInternalAudio) {
+		swInternalAudio.setChecked(isInternalAudio);
 	}
 
 	@Override

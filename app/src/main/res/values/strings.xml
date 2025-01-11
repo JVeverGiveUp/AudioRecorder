@@ -262,6 +262,7 @@
 		<item>M4a</item>
 		<item>Wav</item>
 		<item>3gp</item>
+		<item>Mp3</item>
 	</string-array>
 
 	<string-array name="bit_rates2">
@@ -289,4 +290,27 @@
 	</string-array>
 
 	<string name="app_widget_description">Start recording widget</string>
+
+	<string name="processing_mp3">Processing mp3 file %s</string>
+	<string name="internal_audio">Using internal audio (If disable using Micro)</string>
+	<string name="do_you_stop">Do you want to stop record?</string>
+	<string name="detail_message_stop">Go to settings also cancel current record audio</string>
+	<string name="buy_premium">Buy Premium Version</string>
+	<string name="pro_premium">Premium version</string>
+	<string name="pro_premium_msg">\t* Unlock all features\n\t* Free of ads</string>
+	<string name="pro_explain_msg">This is 1 time purchased only and gives you unlimited access to what you purchased</string>
+	<string name="pro_unlock_title">Unlock all features</string>
+	<string name="pro_no_ads">Free of ads</string>
+	<string name="pro_no_ads_msg">\t* Remove all of ads\n\t* No ads anymore</string>
+	<string name="pro_all_features">Unlock all features</string>
+	<string name="pro_all_features_msg">\t* Unlock settings of Internal Audio Record\n\t* Customize wav/mp3 record options with stereo\n\t* Quality of recording up to 256 kbps\n\t* Customize sample rate, bit rate, channel count</string>
+	<string name="buy">Buy</string>
+	<string name="pro_notice">Below options for premium version only. Please purchased or using default settings!</string>
+	<string name="audio_source_notice">Internal Audio: Sound from device only, but some apps may not support\nMic: Sound from microphone, always support but may have some noise</string>
+	<string name="pro_version">Unlock: Premium Version</string>
+	<string name="privacy">Privacy policy</string>
+
+	<string name="app_id_ads" translatable="false">ca-app-pub-4810108738429112~3398647350</string>
+	<string name="interestial_ads" translatable="false">ca-app-pub-4810108738429112/3534378727</string>
+	<string name="banner_ads" translatable="false">ca-app-pub-4810108738429112/6296273430</string>
 </resources>

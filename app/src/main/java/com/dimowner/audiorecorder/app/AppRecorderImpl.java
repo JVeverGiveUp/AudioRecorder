@@ -40,6 +40,8 @@ import timber.log.Timber;
 
 import static com.dimowner.audiorecorder.AppConstants.PLAYBACK_VISUALIZATION_INTERVAL;
 
+import android.media.projection.MediaProjection;
+
 public class AppRecorderImpl implements AppRecorder {
 
 	private RecorderContract.Recorder audioRecorder;
@@ -290,6 +292,11 @@ public class AppRecorderImpl implements AppRecorder {
 		apmpPool.clear();
 		audioRecorder.stopRecording();
 		appCallbacks.clear();
+	}
+
+	@Override
+	public void setMediaProjection(MediaProjection mediaProjection) {
+		audioRecorder.setMediaProjection(mediaProjection);
 	}
 
 	private void onRecordingStarted(File output) {

@@ -18,6 +18,7 @@
 package com.dimowner.audiorecorder
 
 import android.Manifest
+import android.app.Activity
 import android.app.Application
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -33,6 +34,12 @@ import android.telephony.TelephonyManager
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import com.dimowner.audiorecorder.util.AndroidUtils
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
+import com.google.android.gms.ads.initialization.InitializationStatus
+import com.ptdstudio.internalsoundrecorder.appopenad.AppOpenHelper
+import com.ptdstudio.internalsoundrecorder.appopenad.OnShowAdCompleteListener
+import com.ptdstudio.internalsoundrecorder.util.ProVersionManager
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
@@ -49,6 +56,7 @@ class ARApplication : Application() {
             Timber.plant(DebugTree())
         }
         super.onCreate()
+        INSTANCE = this
         PACKAGE_NAME = applicationContext.packageName
         applicationHandler = Handler(applicationContext.mainLooper)
         screenWidthDp = AndroidUtils.pxToDp(
@@ -75,6 +83,15 @@ class ARApplication : Application() {
             Timber.e(e)
         }
         //		FirebaseApp.initializeApp(this);
+        //		FirebaseApp.initializeApp(this);
+        proVersionManager = ProVersionManager.getINSTANCE(this)
+        if (proVersionManager!!.isNoAdsVersion) {
+            MobileAds.initialize(this)
+            { initializationStatus: InitializationStatus? -> }
+            setupConfigAds()
+            appOpenHelper = AppOpenHelper(this)
+        }
+
     }
 
     override fun onTerminate() {
@@ -200,5 +217,44 @@ class ARApplication : Application() {
         @JvmStatic
 		val longWaveformSampleCount: Int
             get() = (AppConstants.WAVEFORM_WIDTH * screenWidthDp).toInt()
+
+
+        private var INSTANCE: ARApplication? = null
+        fun getInstance(): ARApplication {
+            return INSTANCE!!
+        }
     }
+
+    var proVersionManager: ProVersionManager? = null
+
+    private var appOpenHelper: AppOpenHelper? = null
+
+    private fun setupConfigAds() {
+        val testDevices: MutableList<String> = ArrayList()
+        testDevices.add("85B7D76CD7221E9F1ADABEEFEE2D0B8A")
+        testDevices.add("E064B31E4691F56D63FD841E017E27CD")
+
+        val requestConfiguration = RequestConfiguration.Builder()
+            .setTestDeviceIds(testDevices)
+            .build()
+        MobileAds.setRequestConfiguration(requestConfiguration)
+    }
+
+    fun showAdIfAvailable(
+        activity: Activity,
+        onShowAdCompleteListener: OnShowAdCompleteListener
+    ) {
+        // We wrap the showAdIfAvailable to enforce that other classes only interact with MyApplication
+        // class.
+        appOpenHelper?.showAdIfAvailable(activity, onShowAdCompleteListener)
+    }
+
+    fun isShowingAds(): Boolean {
+        //in case premium version, appOpenHelper will be null
+        if (appOpenHelper != null) return appOpenHelper!!.isGrantedPermissionShowAds
+        return false
+    }
+
+
+
 }

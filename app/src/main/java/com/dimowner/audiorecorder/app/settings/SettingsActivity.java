@@ -24,6 +24,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.DocumentsContract;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -45,14 +47,18 @@ import com.dimowner.audiorecorder.app.browser.FileBrowserActivity;
 import com.dimowner.audiorecorder.app.moverecords.MoveRecordsActivity;
 import com.dimowner.audiorecorder.app.trash.TrashActivity;
 import com.dimowner.audiorecorder.app.widget.SettingView;
+import com.dimowner.audiorecorder.data.Prefs;
 import com.dimowner.audiorecorder.util.AndroidUtils;
 import com.dimowner.audiorecorder.util.FileUtil;
 import com.dimowner.audiorecorder.util.RippleUtils;
+import com.ptdstudio.internalsoundrecorder.InAppPurchased;
+import com.ptdstudio.internalsoundrecorder.util.PrivacyPolicy;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import timber.log.Timber;
@@ -67,13 +73,15 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 	private TextView txtLocation;
 	private TextView txtStorageInfo;
 	private TextView txtFileBrowser;
+	private TextView txtProNotice;
 	private TextView btnView;
 	private View migratePublicStoragePanel;
 	private View panelPublicDir;
 
 	private Switch swPublicDir;
 	private Switch swKeepScreenOn;
-	private Switch swAskToRename;
+	private Switch swAskToRename, swInternalAudio;
+	Prefs prefs;
 
 	private Spinner nameFormatSelector;
 
@@ -82,6 +90,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 	private SettingView bitrateSetting;
 	private SettingView channelsSetting;
 	private Button btnReset;
+	private InAppPurchased inAppPurchased = null;
 
 	private SettingsContract.UserActionsListener presenter;
 	private ColorMap colorMap;
@@ -97,6 +106,65 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 			}
 		}
 	};
+
+	private final CompoundButton.OnCheckedChangeListener internalAudioListener = new CompoundButton.OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton btn, boolean isChecked) {
+			prefs.setInternalAudio(isChecked);
+			View holderAudioConfig = findViewById(R.id.holderAudioConfig);
+			/*if(isChecked){
+				holderAudioConfig.setVisibility(View.INVISIBLE);
+			}else {
+				holderAudioConfig.setVisibility(View.VISIBLE);
+			}*/
+			if (isChecked) {
+				formatSetting.removeChip(formatsKeys);
+				formatSetting.addChip(new String[]{formatsKeys[1], formatsKeys[3]}, new String[]{formats[1], formats[3]});
+				btnReset.setVisibility(View.GONE);
+				if(formatSetting.getSelected() == null){
+					String prefFormatKey = prefs.getSettingRecordingFormat();
+					if(prefFormatKey.equals(formatsKeys[1]) || prefFormatKey.equals(formatsKeys[3])){
+						formatSetting.setSelected(prefs.getSettingRecordingFormat());
+						prefs.setSettingRecordingFormat(prefs.getSettingRecordingFormat());
+					}else {
+						formatSetting.setSelected(formatsKeys[1]);
+						prefs.setSettingRecordingFormat(formatsKeys[1]);
+					}
+				}
+				if(!ARApplication.Companion.getInstance().getProVersionManager().isAllFeatures()){
+					sampleRateSetting.setEnabled(false);
+					bitrateSetting.setEnabled(false);
+					channelsSetting.setEnabled(false);
+					txtProNotice.setVisibility(View.VISIBLE);
+				}
+			} else {
+				sampleRateSetting.setEnabled(true);
+				bitrateSetting.setEnabled(true);
+				channelsSetting.setEnabled(true);
+				txtProNotice.setVisibility(View.GONE);
+
+				btnReset.setVisibility(View.VISIBLE);
+				formatSetting.removeChip(formatsKeys);
+				formatSetting.addChip(formatsKeys, formats);
+				formatSetting.setSelected(prefs.getSettingRecordingFormat());
+
+			}
+			updateRecordingInfo(prefs.getSettingRecordingFormat());
+		}
+	};
+
+	class CustomHandler extends Handler {
+		@Override
+		public void handleMessage(@NonNull Message msg) {
+			//super.handleMessage(msg);
+			if(msg.what == 1){
+				sampleRateSetting.setEnabled(true);
+				bitrateSetting.setEnabled(true);
+				channelsSetting.setEnabled(true);
+				txtProNotice.setVisibility(View.GONE);
+			}
+		}
+	}
 
 	private String[] formats;
 	private String[] formatsKeys;
@@ -120,6 +188,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
 
+		prefs = ARApplication.getInjector().providePrefs(getApplicationContext());
 		btnView = findViewById(R.id.btnView);
 
 		btnView.setBackground(RippleUtils.createRippleShape(
@@ -134,6 +203,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		txtInformation = findViewById(R.id.txt_information);
 		txtLocation = findViewById(R.id.txt_records_location);
 		txtStorageInfo = findViewById(R.id.txt_storage_info);
+		txtProNotice = findViewById(R.id.txt_premium_notice);
 		migratePublicStoragePanel = findViewById(R.id.migrate_public_storage_panel);
 		migratePublicStoragePanel.setOnClickListener(this);
 		txtLocation.setOnClickListener(this);
@@ -143,6 +213,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		findViewById(R.id.btnTrash).setOnClickListener(this);
 		findViewById(R.id.btnRate).setOnClickListener(this);
 		findViewById(R.id.btnRequest).setOnClickListener(this);
+		findViewById(R.id.btnProVersion).setOnClickListener(this);
 		panelPublicDir = findViewById(R.id.panelPublicDir);
 		txtFileBrowser = findViewById(R.id.btn_file_browser);
 		txtFileBrowser.setOnClickListener(this);
@@ -164,7 +235,8 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		formatsKeys = new String[] {
 				AppConstants.FORMAT_M4A,
 				AppConstants.FORMAT_WAV,
-				AppConstants.FORMAT_3GP
+				AppConstants.FORMAT_3GP,
+				AppConstants.FORMAT_MP3
 		};
 		formatSetting.setData(formats, formatsKeys);
 		formatSetting.setOnChipCheckListener((key, name, checked) -> presenter.setSettingRecordingFormat(key));
@@ -240,6 +312,9 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 
 		initThemeColorSelector();
 		initNameFormatSelector();
+
+		CustomHandler handler = new CustomHandler();
+		inAppPurchased = new InAppPurchased(handler);
 	}
 
 	private void initThemeColorSelector() {
@@ -309,6 +384,17 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 			swPublicDir.setChecked(false);
 			swPublicDir.setEnabled(false);
 		}
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+			swInternalAudio = findViewById(R.id.swIsInternalAudio);
+			//updateRecordingInfo(prefs.getSettingRecordingFormat());
+			swInternalAudio.setOnCheckedChangeListener(internalAudioListener);
+			swInternalAudio.setChecked(prefs.isInternalAudio());
+
+		}else{
+			View holder = findViewById(R.id.holderInternalAudio);
+			holder.setVisibility(View.GONE);
+			prefs.setInternalAudio(false);
+		}
 	}
 
 	@Override
@@ -347,6 +433,10 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 			presenter.loadSettings();
 		} else if (id == R.id.btnRequest) {
 			requestFeature();
+		}else if(id == R.id.btnProVersion){
+			com.ptdstudio.internalsoundrecorder.util.AndroidUtils.INSTANCE.showPremiumDialog(this, inAppPurchased);
+		}else if(id == R.id.btnPrivacy){
+			PrivacyPolicy.start(getApplicationContext());
 		}
 	}
 

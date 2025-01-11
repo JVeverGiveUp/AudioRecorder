@@ -68,6 +68,46 @@
 					android:paddingStart="0dp"
 					android:paddingEnd="1dp"/>
 
+			<LinearLayout
+				android:id="@+id/holderInternalAudio"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					style="@style/Text.NormalLabel"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:text="@string/internal_audio"
+					android:layout_marginTop="@dimen/spacing_medium"
+					android:layout_marginBottom="@dimen/spacing_medium"
+					android:layout_marginEnd="@dimen/spacing_normal"
+					android:layout_marginStart="@dimen/spacing_normal"
+					android:drawableStart="@drawable/baseline_mic_white_24dp"
+					android:drawablePadding="@dimen/spacing_normal" />
+
+				<Switch
+					android:id="@+id/swIsInternalAudio"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginEnd="@dimen/spacing_xsmall" />
+			</LinearLayout>
+			<TextView
+				android:id="@+id/txt_premium_notice"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="@dimen/spacing_small"
+				android:layout_marginStart="@dimen/spacing_xsmall"
+				android:layout_marginEnd="@dimen/spacing_xsmall"
+				android:layout_gravity="center_vertical"
+				android:fontFamily="sans-serif-light"
+				android:textColor="@color/md_yellow_800F"
+				android:textStyle="italic"
+				android:textSize="@dimen/text_medium"
+				android:text="@string/pro_notice" />
+
 			<com.dimowner.audiorecorder.app.widget.SettingView
 					android:id="@+id/setting_recording_format"
 					android:layout_width="match_parent"

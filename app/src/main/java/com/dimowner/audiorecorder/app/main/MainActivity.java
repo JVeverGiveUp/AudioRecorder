@@ -18,6 +18,7 @@ package com.dimowner.audiorecorder.app.main;
 
 import android.Manifest;
 import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -25,9 +26,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -41,6 +45,15 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dimowner.audiorecorder.data.Prefs;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.dimowner.audiorecorder.ARApplication;
 import com.dimowner.audiorecorder.ColorMap;
 import com.dimowner.audiorecorder.IntArrayList;
@@ -67,15 +80,47 @@ import com.dimowner.audiorecorder.util.AndroidUtils;
 import com.dimowner.audiorecorder.util.AnimationUtil;
 import com.dimowner.audiorecorder.util.FileUtil;
 import com.dimowner.audiorecorder.util.TimeUtils;
+import com.ptdstudio.internalsoundrecorder.InAppPurchased;
+import com.ptdstudio.internalsoundrecorder.util.ProVersionManager;
 
 import java.io.File;
 import java.util.List;
+import java.util.Random;
 
 import androidx.annotation.NonNull;
 import timber.log.Timber;
 
 public class MainActivity extends Activity implements MainContract.View, View.OnClickListener {
 
+	//need_check added
+	static final int MEDIA_PROJECTION_REQUEST_CODE = 113;
+	void startMediaProjectionRequest(){
+		MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) getApplicationContext().getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+		startActivityForResult(mediaProjectionManager.createScreenCaptureIntent(), MEDIA_PROJECTION_REQUEST_CODE);
+	}
+
+	public static class CustomHandler extends Handler {
+		private final RecordingService recordingService;
+		private final String path;
+		public CustomHandler(RecordingService recordingService, String path){
+			this.recordingService = recordingService;
+			this.path = path;
+		}
+		@Override
+		public void handleMessage(@NonNull Message msg) {
+			super.handleMessage(msg);
+			if(msg.what == 1){
+				//MainActivity.getInstance().presenter.startRecording(INSTANCE.getApplicationContext());
+				//MainActivity.getInstance().startAudioRecording();
+				recordingService.startRecording(path);
+			}
+		}
+	}
+	private static MainActivity INSTANCE;
+	public static MainActivity getInstance(){
+		return INSTANCE;
+	}
+// TODO: Fix WaveForm blinking when seek
 // TODO: Fix waveform when long record (there is no waveform)
 // TODO: Ability to scroll up from the bottom of the list
 //	TODO: Bluetooth micro support
@@ -112,8 +157,9 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 
 	private MainContract.UserActionsListener presenter;
 	private ColorMap colorMap;
-	private FileRepository fileRepository;
 	private ColorMap.OnThemeColorChangeListener onThemeColorChangeListener;
+	private FileRepository fileRepository;
+	private Prefs prefs;
 
 	private final ServiceConnection connection = new ServiceConnection() {
 
@@ -154,12 +200,20 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		return new Intent(context, MainActivity.class);
 	}
 
+	private ProVersionManager proVersionManager;
+	InterstitialAd mInterstitialAd;
+	boolean isAdJustShowed = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		colorMap = ARApplication.getInjector().provideColorMap(getApplicationContext());
 		setTheme(colorMap.getAppThemeResource());
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		InAppPurchased inAppPurchased = new InAppPurchased(new Handler());
+		inAppPurchased.startGetBilling(this);
+		proVersionManager = ARApplication.Companion.getInstance().getProVersionManager();
+
 
 		waveformView = findViewById(R.id.record);
 		recordingWaveformView = findViewById(R.id.recording_view);
@@ -264,7 +318,52 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 				}
 			}
 		}
-		checkNotificationPermission();
+		//need_check
+		INSTANCE = this;
+		prefs = ARApplication.getInjector().providePrefs(getApplicationContext());
+//need_check
+//		AdView mAdView = (AdView) findViewById(R.id.adView);
+//		if(proVersionManager.isNoAdsVersion())
+//			mAdView.setVisibility(View.GONE);
+//		else {
+//
+//			AdRequest adRequest = new AdRequest.Builder()
+//					.build();
+//			mAdView.loadAd(adRequest);
+//
+//			requestNewInterstitial();
+//		}
+	}
+
+
+	private void requestNewInterstitial() {
+		AdRequest adRequest = new AdRequest.Builder().build();
+
+		InterstitialAdLoadCallback interstitialAdLoadCallback = new InterstitialAdLoadCallback(){
+			@Override
+			public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+				super.onAdLoaded(interstitialAd);
+				mInterstitialAd = interstitialAd;
+			}
+
+			@Override
+			public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+				super.onAdFailedToLoad(loadAdError);
+				mInterstitialAd = null;
+			}
+		};
+		InterstitialAd.load(this, "ca-app-pub-4810108738429112/9776201382", adRequest, interstitialAdLoadCallback);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		//need_check
+//		if(proVersionManager.isNoAdsVersion()){
+//			AdView mAdView = (AdView) findViewById(R.id.adView);
+//			if(mAdView != null)
+//				mAdView.setVisibility(View.GONE);
+//		}
 	}
 
 	@Override
@@ -308,9 +407,13 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		} else if (id == R.id.btn_record) {
 			if (checkRecordPermission2()) {
 				if (checkStoragePermission2()) {
-					//Start or stop recording
-					startRecordingService();
-					presenter.pauseUnpauseRecording(getApplicationContext());
+					if(checkNotificationPermission()) {
+						//Start or stop recording
+
+						startAudioRecording();
+						//need_check
+						presenter.pauseUnpauseRecording(getApplicationContext());
+					}
 				}
 			}
 		} else if (id == R.id.btn_record_stop) {
@@ -319,8 +422,39 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 			presenter.stopPlayback();
 		} else if (id == R.id.btn_records_list) {
 			startActivity(RecordsActivity.getStartIntent(getApplicationContext()));
+			if(!proVersionManager.isNoAdsVersion()) {
+				int var = (new Random().nextInt(4) + 1);
+				if (!isAdJustShowed && (var % 4 == 0) && mInterstitialAd != null) {
+					mInterstitialAd.show(this);
+					isAdJustShowed = true;
+					requestNewInterstitial();
+				} else
+					isAdJustShowed = false;
+			}
 		} else if (id == R.id.btn_settings) {
-			startActivity(SettingsActivity.getStartIntent(getApplicationContext()));
+			//need_check added
+			if(!presenter.isRecording()) {
+				startActivity(SettingsActivity.getStartIntent(getApplicationContext()));
+				if(!proVersionManager.isNoAdsVersion()) {
+					int var = (new Random().nextInt(3) + 1);
+					if (!isAdJustShowed && (var % 3 == 0) && mInterstitialAd != null) {
+						mInterstitialAd.show(this);
+						requestNewInterstitial();
+						isAdJustShowed = true;
+					} else
+						isAdJustShowed = false;
+				}
+			}else{
+				AndroidUtils.showDialogYesNo(this, R.drawable.ic_check_36, getString(R.string.do_you_stop), getString(R.string.detail_message_stop),
+						new View.OnClickListener() {
+							@SuppressLint("NewApi")
+							@Override
+							public void onClick(View v) {
+										presenter.stopRecording();
+										startActivity(SettingsActivity.getStartIntent(getApplicationContext()));
+								}
+						});
+			}
 		} else if (id == R.id.btn_share) {
 			showMenu(view);
 		} else if (id == R.id.btn_import) {
@@ -355,6 +489,24 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == REQ_CODE_IMPORT_AUDIO && resultCode == RESULT_OK){
 			presenter.importAudioFile(getApplicationContext(), data.getData());
+		}else if(requestCode == MEDIA_PROJECTION_REQUEST_CODE){
+			if(resultCode == RESULT_OK){
+				String path = null;
+				try {
+					path = fileRepository.provideRecordFile().getAbsolutePath();
+					Intent audioCaptureIntent = new Intent(this, RecordingService.class);
+					audioCaptureIntent.setAction(RecordingService.ACTION_START_RECORDING_SERVICE);
+					audioCaptureIntent.putExtra(RecordingService.EXTRA_RESULT_DATA, data);
+					audioCaptureIntent.putExtra(RecordingService.EXTRAS_KEY_RECORD_PATH, path);
+					startForegroundService(audioCaptureIntent);
+					//need_check service start type
+					//startService(intent);
+				} catch (CantCreateFileException e) {
+					throw new RuntimeException(e);
+				}
+			}else{
+				Toast.makeText(this, "Request to obtain MediaProjection denied.", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 
@@ -504,6 +656,27 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		finish();
 	}
 
+	private void startAudioRecording(){
+		if(prefs == null){
+			prefs = ARApplication.getInjector().providePrefs(getApplicationContext());
+		}
+		if(prefs.isInternalAudio()) {
+			if (!presenter.isRecording())
+				startMediaProjectionRequest();
+			else
+				//presenter.startRecording(getApplicationContext());
+				startRecordingService();
+		}else {
+			startRecordingService();
+			/*if (!presenter.isRecording()) {
+				Intent audioCaptureIntent = new Intent(this, RecordingService.class);
+				audioCaptureIntent.setAction(RecordingService.ACTION_START_RECORDING_SERVICE);
+				startForegroundService(audioCaptureIntent);
+			}else
+				presenter.startRecording(getApplicationContext());*/
+		}
+
+	}
 	@Override
 	public void startRecordingService() {
 		try {
@@ -871,17 +1044,28 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 					&& grantResults[0] == PackageManager.PERMISSION_GRANTED
 					&& grantResults[1] == PackageManager.PERMISSION_GRANTED
 					&& grantResults[2] == PackageManager.PERMISSION_GRANTED) {
-			startRecordingService();
+			//presenter.startRecording(getApplicationContext());
+			startAudioRecording();
 		} else if (requestCode == REQ_CODE_RECORD_AUDIO && grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			if (checkStoragePermission2()) {
-				startRecordingService();
+				//presenter.startRecording(getApplicationContext());
+				startAudioRecording();
+			}
+		}else if (requestCode == REQ_CODE_POST_NOTIFICATIONS && grantResults.length > 0
+				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			if (checkNotificationPermission()) {
+				//start notification
+				startAudioRecording();
 			}
 		} else if (requestCode == REQ_CODE_WRITE_EXTERNAL_STORAGE && grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED
 				&& grantResults[1] == PackageManager.PERMISSION_GRANTED) {
 			if (checkRecordPermission2()) {
-				startRecordingService();
+				if(checkNotificationPermission()) {
+					//presenter.startRecording(getApplicationContext());
+					startAudioRecording();
+				}
 			}
 		} else if (requestCode == REQ_CODE_READ_EXTERNAL_STORAGE_IMPORT && grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED
@@ -899,10 +1083,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 				&& (grantResults[0] == PackageManager.PERMISSION_DENIED
 				|| grantResults[1] == PackageManager.PERMISSION_DENIED)) {
 			presenter.setStoragePrivate(getApplicationContext());
-			startRecordingService();
-		} else if (requestCode == REQ_CODE_POST_NOTIFICATIONS && grantResults.length > 0
+			startAudioRecording();
+		} /*else if (requestCode == REQ_CODE_POST_NOTIFICATIONS && grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			//Post notifications permission is granted do nothing
-		}
+		}*/
 	}
 }

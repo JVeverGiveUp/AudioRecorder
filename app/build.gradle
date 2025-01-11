@@ -8,12 +8,27 @@ apply plugin: 'kotlin-kapt'
 android {
 	namespace 'com.dimowner.audiorecorder'
 	compileSdkVersion 34
+	ndkVersion "21.1.6352462"
+
 	defaultConfig {
 		applicationId "com.dimowner.audiorecorder"
-		minSdkVersion 23
+		minSdkVersion 30
 		targetSdkVersion 34
 		versionCode 935
 		versionName "0.9.99"
+
+		externalNativeBuild {
+			cmake {
+				cppFlags "-fexceptions -frtti -fvisibility=hidden -ffunction-sections -fdata-sections -Wl,--gc-sections"
+				cFlags "-fexceptions -frtti -fvisibility=hidden -ffunction-sections -fdata-sections -Wl,--gc-sections"
+				arguments '-DANDROID_STL=c++_static'
+			}
+		}
+		ndk {
+			abiFilters "armeabi-v7a", "arm64-v8a", "x86_64", "x86"
+			moduleName "app"
+			stl "stlport_static"
+		}
 	}
 
 	buildFeatures {
@@ -51,6 +66,13 @@ android {
 		}
 		debug {
 			minifyEnabled false
+		}
+	}
+
+	externalNativeBuild {
+		cmake {
+			path "src/main/cpp/CMakeLists.txt"
+			version "3.10.2"
 		}
 	}
 
@@ -92,7 +114,8 @@ android.variantFilter { variant ->
 }
 
 dependencies {
-	def androidX = "1.3.2"
+	implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    def androidX = "1.3.2"
 	def coroutines = "1.8.0"
 	def timber = "5.0.1"
 
@@ -114,4 +137,16 @@ dependencies {
 //	// When using the BoM, you don't specify versions in Firebase library dependencies
 //	implementation 'com.google.firebase:firebase-crashlytics'
 //	implementation 'com.google.firebase:firebase-analytics'
+
+	def billing_version = "6.0.1"
+
+	implementation("com.android.billingclient:billing:$billing_version")
+	implementation 'com.google.android.gms:play-services-ads:22.2.0'
+	implementation "androidx.viewpager2:viewpager2:1.0.0"
+	implementation 'androidx.work:work-runtime:2.7.1'
+	implementation 'androidx.work:work-runtime-ktx:2.7.1'
+	implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+	implementation "androidx.lifecycle:lifecycle-runtime:2.5.1"
+	implementation 'androidx.lifecycle:lifecycle-process:2.5.1'
+	annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.5.1"
 }

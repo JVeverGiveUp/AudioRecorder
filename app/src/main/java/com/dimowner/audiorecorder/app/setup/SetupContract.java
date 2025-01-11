@@ -41,6 +41,8 @@ public class SetupContract {
 		void showSizePerMin(String size);
 
 		void updateRecordingInfo(String format);
+
+		void updateInternalView(boolean isInternalAudio);
 	}
 
 	public interface UserActionsListener extends Contract.UserActionsListener<SetupContract.View> {
@@ -62,5 +64,7 @@ public class SetupContract {
 		void executeFirstRun();
 
 		void resetSettings();
+
+		void setInternalSource(boolean isInternalAdio);
 	}
 }

@@ -765,6 +765,12 @@ public class MainPresenter implements MainContract.UserActionsListener {
 		listenPlaybackProgress = true;
 	}
 
+//need_check: removed
+	@Override
+	public boolean isRecording() {
+		return appRecorder.isRecording() || appRecorder.isPaused();
+	}
+
 	@Override
 	public void importAudioFile(final Context context, final Uri uri) {
 		if (view != null) {

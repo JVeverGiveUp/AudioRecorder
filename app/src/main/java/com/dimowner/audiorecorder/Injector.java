@@ -54,6 +54,8 @@ import com.dimowner.audiorecorder.app.settings.SettingsContract;
 import com.dimowner.audiorecorder.app.settings.SettingsPresenter;
 import com.dimowner.audiorecorder.data.database.TrashDataSource;
 import com.ptdstudio.internalsoundrecorder.audio.recorder.InternalMp3Recorder;
+import com.ptdstudio.internalsoundrecorder.audio.recorder.InternalWavRecorder;
+import com.ptdstudio.internalsoundrecorder.audio.recorder.Mp3Recorder;
 
 public class Injector {
 
@@ -160,8 +162,8 @@ public class Injector {
 	}
 
 	public RecorderContract.Recorder provideAudioRecorder(Context context) {
-		if(providePrefs().isInternalAudio()){
-			switch (providePrefs().getSettingRecordingFormat()) {
+		if(providePrefs(context).isInternalAudio()){
+			switch (providePrefs(context).getSettingRecordingFormat()) {
 				default:
 				case AppConstants.FORMAT_WAV:
 					return InternalWavRecorder.getInstance();
