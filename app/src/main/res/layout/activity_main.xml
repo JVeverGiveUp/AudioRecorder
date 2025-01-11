@@ -304,6 +304,18 @@
 			android:layout_gravity="center"
 			android:animateLayoutChanges="true"
 			android:orientation="horizontal">
+				<ImageButton
+					android:id="@+id/btn_record_delete"
+					android:layout_width="42dp"
+					android:layout_height="42dp"
+					android:background="?android:selectableItemBackgroundBorderless"
+					android:contentDescription="@string/delete"
+					android:layout_margin="@dimen/spacing_xtiny"
+					android:layout_gravity="center"
+					android:scaleType="center"
+					android:visibility="invisible"
+					android:src="@drawable/ic_delete_forever_36"/>
+
 
 			<Button
 				android:id="@+id/btn_record"
@@ -324,18 +336,19 @@
 			<Button
 				android:id="@+id/btn_record_stop"
 				style="?android:attr/buttonBarButtonStyle"
-				android:layout_width="78dp"
-				android:layout_height="78dp"
+				android:layout_width="60dp"
+				android:layout_height="60dp"
 				android:layout_margin="@dimen/spacing_small"
 				android:padding="@dimen/spacing_zero"
-				android:textSize="13sp"
+				android:textSize="12sp"
 				android:adjustViewBounds="true"
 				android:contentDescription="@string/button_finish"
 				android:text="@string/button_finish"
 				android:background="@drawable/round_button_green"
 				android:layout_gravity="center"
 				android:scaleType="center"
-				android:textColor="@color/text_primary_light"/>
+				android:textColor="@color/text_primary_light"
+				android:visibility="invisible"/>
 
 		</LinearLayout>
 

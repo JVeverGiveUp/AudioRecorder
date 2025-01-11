@@ -69,6 +69,8 @@ public interface MainContract {
 
 		void askDeleteRecord(String name);
 
+		void askDeleteRecordForever();
+
 		void showRecordInfo(RecordInfo info);
 
 		void updateRecordingView(IntArrayList data, long durationMills);
@@ -95,7 +97,8 @@ public interface MainContract {
 		void setAudioRecorder(RecorderContract.Recorder recorder);
 
 		void pauseUnpauseRecording(Context context);
-		void stopRecording();
+		void stopRecording(boolean deleteRecord);
+		void cancelRecording();
 
 		void startPlayback();
 		void onPlaybackClick(Context context, boolean isStorageAvailable);
@@ -131,7 +134,7 @@ public interface MainContract {
 		//TODO: Remove this getters
 		boolean isStorePublic();
 
-		void deleteActiveRecord();
+		void deleteActiveRecord(boolean forever);
 
 		void onRecordInfo();
 

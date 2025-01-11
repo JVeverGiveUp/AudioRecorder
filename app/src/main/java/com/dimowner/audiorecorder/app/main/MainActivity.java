@@ -146,6 +146,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	private ImageButton btnPlay;
 	private ImageButton btnStop;
 	private Button btnRecord;
+	private ImageButton btnDelete;
 	private Button btnRecordingStop;
 	private ImageButton btnShare;
 	private ImageButton btnImport;
@@ -225,6 +226,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnPlay = findViewById(R.id.btn_play);
 		btnRecord = findViewById(R.id.btn_record);
 		btnRecordingStop = findViewById(R.id.btn_record_stop);
+		btnDelete = findViewById(R.id.btn_record_delete);
 		btnStop = findViewById(R.id.btn_stop);
 		ImageButton btnRecordsList = findViewById(R.id.btn_records_list);
 		ImageButton btnSettings = findViewById(R.id.btn_settings);
@@ -239,12 +241,15 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 
 		txtProgress.setText(TimeUtils.formatTimeIntervalHourMinSec2(0));
 
-		btnRecordingStop.setVisibility(View.GONE);
+		btnDelete.setVisibility(View.INVISIBLE);
+		btnDelete.setEnabled(false);
+		btnRecordingStop.setVisibility(View.INVISIBLE);
 		btnRecordingStop.setEnabled(false);
 
 		btnPlay.setOnClickListener(this);
 		btnRecord.setOnClickListener(this);
 		btnRecordingStop.setOnClickListener(this);
+		btnDelete.setOnClickListener(this);
 		btnStop.setOnClickListener(this);
 		btnRecordsList.setOnClickListener(this);
 		btnSettings.setOnClickListener(this);
@@ -417,7 +422,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 				}
 			}
 		} else if (id == R.id.btn_record_stop) {
-			presenter.stopRecording();
+			presenter.stopRecording(false);
+		} else if (id == R.id.btn_record_delete) {
+			//need_check
+			presenter.cancelRecording();
 		} else if (id == R.id.btn_stop) {
 			presenter.stopPlayback();
 		} else if (id == R.id.btn_records_list) {
@@ -450,7 +458,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 							@SuppressLint("NewApi")
 							@Override
 							public void onClick(View v) {
-										presenter.stopRecording();
+										presenter.stopRecording(false);
 										startActivity(SettingsActivity.getStartIntent(getApplicationContext()));
 								}
 						});
@@ -560,6 +568,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnPlay.setVisibility(View.GONE);
 		btnImport.setVisibility(View.GONE);
 		btnShare.setVisibility(View.GONE);
+		btnDelete.setVisibility(View.VISIBLE);
+		btnDelete.setEnabled(true);
+		btnRecordingStop.setVisibility(View.VISIBLE);
+		btnRecordingStop.setEnabled(true);
 		playProgress.setProgress(0);
 		playProgress.setEnabled(false);
 		txtDuration.setText(R.string.zero_time);
@@ -584,7 +596,9 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnImport.setVisibility(View.VISIBLE);
 		btnShare.setVisibility(View.VISIBLE);
 		playProgress.setEnabled(true);
-		btnRecordingStop.setVisibility(View.GONE);
+		btnDelete.setVisibility(View.INVISIBLE);
+		btnDelete.setEnabled(false);
+		btnRecordingStop.setVisibility(View.INVISIBLE);
 		btnRecordingStop.setEnabled(false);
 		waveformView.setVisibility(View.VISIBLE);
 		recordingWaveformView.setVisibility(View.GONE);
@@ -606,6 +620,8 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnImport.setVisibility(View.GONE);
 		btnShare.setVisibility(View.GONE);
 		btnRecord.setText(R.string.button_resume);
+		btnDelete.setVisibility(View.VISIBLE);
+		btnDelete.setEnabled(true);
 		btnRecordingStop.setVisibility(View.VISIBLE);
 		btnRecordingStop.setEnabled(true);
 		playProgress.setEnabled(false);
@@ -629,8 +645,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		btnPlay.setVisibility(View.GONE);
 		btnImport.setVisibility(View.GONE);
 		btnShare.setVisibility(View.GONE);
-		btnRecordingStop.setVisibility(View.GONE);
-		btnRecordingStop.setEnabled(false);
+		btnDelete.setVisibility(View.VISIBLE);
+		btnDelete.setEnabled(true);
+		btnRecordingStop.setVisibility(View.VISIBLE);
+		btnRecordingStop.setEnabled(true);
 		playProgress.setProgress(0);
 		playProgress.setEnabled(false);
 		txtDuration.setText(R.string.zero_time);
@@ -799,7 +817,18 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 				R.drawable.ic_delete_forever_dark,
 				getString(R.string.warning),
 				getString(R.string.delete_record, name),
-				v -> presenter.deleteActiveRecord()
+				v -> presenter.deleteActiveRecord(false)
+		);
+	}
+
+	@Override
+	public void askDeleteRecordForever() {
+		AndroidUtils.showDialogYesNo(
+				MainActivity.this,
+				R.drawable.ic_delete_forever_dark,
+				getString(R.string.warning),
+				getString(R.string.delete_this_record),
+				v -> presenter.stopRecording(true)
 		);
 	}
 
