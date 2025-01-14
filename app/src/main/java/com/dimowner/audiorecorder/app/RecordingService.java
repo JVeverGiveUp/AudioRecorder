@@ -47,6 +47,7 @@ import com.dimowner.audiorecorder.ARApplication;
 import com.dimowner.audiorecorder.AppConstants;
 import com.dimowner.audiorecorder.BackgroundQueue;
 import com.dimowner.audiorecorder.ColorMap;
+import com.dimowner.audiorecorder.Injector;
 import com.dimowner.audiorecorder.R;
 import com.dimowner.audiorecorder.app.main.MainActivity;
 import com.dimowner.audiorecorder.audio.player.PlayerContractNew;
@@ -309,7 +310,12 @@ public class RecordingService extends Service {
 		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
 			startForeground(NOTIF_ID, buildNotification());
 		} else {
-			startForeground(NOTIF_ID, buildNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE|ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION);
+			int flags = 0;
+			if((ARApplication.getInjector().providePrefs(this).isInternalAudio()))
+				flags = ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE|ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION;
+			else
+				flags = ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE;
+			startForeground(NOTIF_ID, buildNotification(), flags);
 		}
 		started = true;
 	}
