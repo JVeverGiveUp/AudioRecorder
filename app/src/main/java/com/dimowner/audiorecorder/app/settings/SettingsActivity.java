@@ -81,7 +81,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 	private Switch swPublicDir;
 	private Switch swKeepScreenOn;
 	private Switch swAskToRename, swInternalAudio;
-	Prefs prefs;
+	protected Prefs prefs;
 
 	private Spinner nameFormatSelector;
 
@@ -90,7 +90,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 	private SettingView bitrateSetting;
 	private SettingView channelsSetting;
 	private Button btnReset;
-	private InAppPurchased inAppPurchased = null;
+//	private InAppPurchased inAppPurchased = null;
 
 	private SettingsContract.UserActionsListener presenter;
 	private ColorMap colorMap;
@@ -131,7 +131,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 						prefs.setSettingRecordingFormat(formatsKeys[1]);
 					}
 				}
-				if(!ARApplication.Companion.getInstance().getProVersionManager().isAllFeatures()){
+				if(!isAllFeatures()){
 					sampleRateSetting.setEnabled(false);
 					bitrateSetting.setEnabled(false);
 					channelsSetting.setEnabled(false);
@@ -153,7 +153,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		}
 	};
 
-	class CustomHandler extends Handler {
+	public class CustomHandler extends Handler {
 		@Override
 		public void handleMessage(@NonNull Message msg) {
 			//super.handleMessage(msg);
@@ -313,8 +313,8 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		initThemeColorSelector();
 		initNameFormatSelector();
 
-		CustomHandler handler = new CustomHandler();
-		inAppPurchased = new InAppPurchased(handler);
+//		CustomHandler handler = new CustomHandler();
+//		inAppPurchased = new InAppPurchased(handler);
 	}
 
 	private void initThemeColorSelector() {
@@ -434,7 +434,7 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 		} else if (id == R.id.btnRequest) {
 			requestFeature();
 		}else if(id == R.id.btnProVersion){
-			com.ptdstudio.internalsoundrecorder.util.AndroidUtils.INSTANCE.showPremiumDialog(this, inAppPurchased);
+			showPremiumDialog();
 		}else if(id == R.id.btnPrivacy){
 			PrivacyPolicy.start(getApplicationContext());
 		}
@@ -703,5 +703,15 @@ public class SettingsActivity extends Activity implements SettingsContract.View,
 	@Override
 	public void showMessage(int resId) {
 		Toast.makeText(getApplicationContext(), resId, Toast.LENGTH_LONG).show();
+	}
+
+	public void showPremiumDialog(){
+		CustomHandler handler = new CustomHandler();
+		InAppPurchased inAppPurchased = new InAppPurchased(handler);
+		com.ptdstudio.internalsoundrecorder.util.AndroidUtils.INSTANCE.showPremiumDialog(this, inAppPurchased);
+	}
+
+	public boolean isAllFeatures(){
+		return ARApplication.Companion.getInstance().getProVersionManager().isAllFeatures();
 	}
 }

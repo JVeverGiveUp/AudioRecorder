@@ -1,4 +1,5 @@
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
@@ -11,24 +12,23 @@ android {
 	ndkVersion "21.1.6352462"
 
 	defaultConfig {
-		applicationId "com.dimowner.audiorecorder"
-		minSdkVersion 30
+		minSdkVersion 29
 		targetSdkVersion 34
 		versionCode 935
 		versionName "0.9.99"
 
-		externalNativeBuild {
-			cmake {
-				cppFlags "-fexceptions -frtti -fvisibility=hidden -ffunction-sections -fdata-sections -Wl,--gc-sections"
-				cFlags "-fexceptions -frtti -fvisibility=hidden -ffunction-sections -fdata-sections -Wl,--gc-sections"
-				arguments '-DANDROID_STL=c++_static'
-			}
-		}
-		ndk {
-			abiFilters "armeabi-v7a", "arm64-v8a", "x86_64", "x86"
-			moduleName "app"
-			stl "stlport_static"
-		}
+//		externalNativeBuild {
+//			cmake {
+//				cppFlags "-fexceptions -frtti -fvisibility=hidden -ffunction-sections -fdata-sections -Wl,--gc-sections"
+//				cFlags "-fexceptions -frtti -fvisibility=hidden -ffunction-sections -fdata-sections -Wl,--gc-sections"
+//				arguments '-DANDROID_STL=c++_static'
+//			}
+//		}
+//		ndk {
+//			abiFilters "armeabi-v7a", "arm64-v8a", "x86_64", "x86"
+//			moduleName "app"
+//			stl "stlport_static"
+//		}
 	}
 
 	buildFeatures {
@@ -36,30 +36,30 @@ android {
 		buildConfig true
 	}
 
-	def keystorePropertiesFile = rootProject.file("keystore.properties")
-	def keystoreProperties = new Properties()
-	keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
-	signingConfigs {
-		dev {
-			storeFile file('key/debug/debug.keystore')
-			storePassword 'android'
-			keyAlias 'androiddebugkey'
-			keyPassword 'android'
-		}
-		release {
-			storeFile file(keystoreProperties['prodStoreFile'])
-			storePassword keystoreProperties['prodStorePassword']
-			keyAlias keystoreProperties['prodKeyAlias']
-			keyPassword keystoreProperties['prodKeyPassword']
-		}
-	}
+//	def keystorePropertiesFile = rootProject.file("keystore.properties")
+//	def keystoreProperties = new Properties()
+//	keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+//
+//	signingConfigs {
+//		dev {
+//			storeFile file('key/debug/debug.keystore')
+//			storePassword 'android'
+//			keyAlias 'androiddebugkey'
+//			keyPassword 'android'
+//		}
+//		release {
+//			storeFile file(keystoreProperties['prodStoreFile'])
+//			storePassword keystoreProperties['prodStorePassword']
+//			keyAlias keystoreProperties['prodKeyAlias']
+//			keyPassword keystoreProperties['prodKeyPassword']
+//		}
+//	}
 
 	buildTypes {
 		release {
-			minifyEnabled true
-			shrinkResources true
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//			minifyEnabled true
+//			shrinkResources true
+//			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //			firebaseCrashlytics {
 //				mappingFileUploadEnabled true
 //			}
@@ -69,49 +69,49 @@ android {
 		}
 	}
 
-	externalNativeBuild {
-		cmake {
-			path "src/main/cpp/CMakeLists.txt"
-			version "3.10.2"
-		}
-	}
+//	externalNativeBuild {
+//		cmake {
+//			path "src/main/cpp/CMakeLists.txt"
+//			version "3.10.2"
+//		}
+//	}
 
-	flavorDimensions "default"
+//	flavorDimensions "default"
 
-	productFlavors {
-		debugConfig {
-			dimension "default"
-			applicationId "com.dimowner.audiorecorder.debug"
-			signingConfig = signingConfigs.dev
-		}
-		releaseConfig {
-			dimension "default"
-			signingConfig = signingConfigs.dev
-			applicationId "com.dimowner.audiorecorder"
-		}
-	}
+//	productFlavors {
+//		debugConfig {
+//			dimension "default"
+//			applicationId "com.dimowner.audiorecorder.debug"
+//			signingConfig = signingConfigs.dev
+//		}
+//		releaseConfig {
+//			dimension "default"
+//			signingConfig = signingConfigs.dev
+//			applicationId "com.dimowner.audiorecorder"
+//		}
+//	}
 
 	compileOptions {
 		sourceCompatibility = JavaVersion.VERSION_17
 		targetCompatibility = JavaVersion.VERSION_17
 	}
 
-	lintOptions {
-		abortOnError false
-	}
+//	lintOptions {
+//		abortOnError false
+//	}
 }
 
 // Remove not needed buildVariants.
-android.variantFilter { variant ->
-	if (variant.buildType.name == 'release'
-			&& variant.getFlavors().get(0).name == 'debugConfig') {
-		variant.setIgnore(true)
-	}
-	if (variant.buildType.name == 'debug'
-			&& variant.getFlavors().get(0).name == 'releaseConfig') {
-		variant.setIgnore(true)
-	}
-}
+//android.variantFilter { variant ->
+//	if (variant.buildType.name == 'release'
+//			&& variant.getFlavors().get(0).name == 'debugConfig') {
+//		variant.setIgnore(true)
+//	}
+//	if (variant.buildType.name == 'debug'
+//			&& variant.getFlavors().get(0).name == 'releaseConfig') {
+//		variant.setIgnore(true)
+//	}
+//}
 
 dependencies {
 	implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
@@ -137,7 +137,6 @@ dependencies {
 //	// When using the BoM, you don't specify versions in Firebase library dependencies
 //	implementation 'com.google.firebase:firebase-crashlytics'
 //	implementation 'com.google.firebase:firebase-analytics'
-
 	def billing_version = "6.0.1"
 
 	implementation("com.android.billingclient:billing:$billing_version")

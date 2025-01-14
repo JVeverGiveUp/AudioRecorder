@@ -45,7 +45,7 @@ import timber.log.Timber.DebugTree
 
 
 //import com.google.firebase.FirebaseApp;
-class ARApplication : Application() {
+open class ARApplication : Application() {
 
     private var audioOutputChangeReceiver: AudioOutputChangeReceiver? = null
     private var rebootReceiver: RebootReceiver? = null
@@ -85,7 +85,7 @@ class ARApplication : Application() {
         //		FirebaseApp.initializeApp(this);
         //		FirebaseApp.initializeApp(this);
         proVersionManager = ProVersionManager.getINSTANCE(this)
-        if (proVersionManager!!.isNoAdsVersion) {
+        if (!proVersionManager!!.isNoAdsVersion) {
             MobileAds.initialize(this)
             { initializationStatus: InitializationStatus? -> }
             setupConfigAds()
@@ -231,6 +231,7 @@ class ARApplication : Application() {
 
     private fun setupConfigAds() {
         val testDevices: MutableList<String> = ArrayList()
+        testDevices.add("28C19B95FA33B8ADF62C2A3409395068")
         testDevices.add("85B7D76CD7221E9F1ADABEEFEE2D0B8A")
         testDevices.add("E064B31E4691F56D63FD841E017E27CD")
 

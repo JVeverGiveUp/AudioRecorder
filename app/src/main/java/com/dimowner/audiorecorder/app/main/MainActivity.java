@@ -210,7 +210,7 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		colorMap = ARApplication.getInjector().provideColorMap(getApplicationContext());
 		setTheme(colorMap.getAppThemeResource());
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main2);
 		InAppPurchased inAppPurchased = new InAppPurchased(new Handler());
 		inAppPurchased.startGetBilling(this);
 		proVersionManager = ARApplication.Companion.getInstance().getProVersionManager();
@@ -327,17 +327,17 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		INSTANCE = this;
 		prefs = ARApplication.getInjector().providePrefs(getApplicationContext());
 //need_check
-//		AdView mAdView = (AdView) findViewById(R.id.adView);
-//		if(proVersionManager.isNoAdsVersion())
-//			mAdView.setVisibility(View.GONE);
-//		else {
-//
-//			AdRequest adRequest = new AdRequest.Builder()
-//					.build();
-//			mAdView.loadAd(adRequest);
-//
-//			requestNewInterstitial();
-//		}
+		AdView mAdView = (AdView) findViewById(R.id.adView);
+		if(proVersionManager.isNoAdsVersion())
+			mAdView.setVisibility(View.GONE);
+		else {
+
+			AdRequest adRequest = new AdRequest.Builder()
+					.build();
+			mAdView.loadAd(adRequest);
+
+			requestNewInterstitial();
+		}
 	}
 
 
@@ -364,11 +364,11 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	protected void onResume() {
 		super.onResume();
 		//need_check
-//		if(proVersionManager.isNoAdsVersion()){
-//			AdView mAdView = (AdView) findViewById(R.id.adView);
-//			if(mAdView != null)
-//				mAdView.setVisibility(View.GONE);
-//		}
+		if(proVersionManager.isNoAdsVersion()){
+			AdView mAdView = (AdView) findViewById(R.id.adView);
+			if(mAdView != null)
+				mAdView.setVisibility(View.GONE);
+		}
 	}
 
 	@Override

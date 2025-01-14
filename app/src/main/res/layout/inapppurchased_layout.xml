@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/white"
+	android:orientation="vertical"
+	android:paddingStart="@dimen/spacing_normal"
+	android:paddingTop="@dimen/spacing_xnormal"
+	android:paddingEnd="@dimen/spacing_normal"
+	android:paddingBottom="@dimen/spacing_normal">
+
+	<TextView
+		android:id="@+id/dialog_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginBottom="@dimen/spacing_normal"
+		android:drawablePadding="16dp"
+		android:text="@string/buy_premium"
+		android:textAppearance="@style/TextAppearance.DialogTitle"
+		android:textColor="@color/md_black_1000"
+		android:textStyle="bold" />
+
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingStart="@dimen/spacing_small"
+		android:paddingLeft="@dimen/spacing_small"
+		android:paddingEnd="@dimen/spacing_small"
+		android:paddingRight="@dimen/spacing_small">
+
+
+		<TextView
+			android:id="@+id/item0"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/pro_premium"
+			android:textAppearance="@style/TextAppearance.DialogContent"
+			android:textColor="@color/md_black_1000"
+			android:textSize="@dimen/text_xmedium"
+			android:textStyle="bold" />
+
+		<Button
+			android:id="@+id/btn_premium"
+			style="@style/Widget.RaisedButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/item0"
+			android:layout_alignParentEnd="true"
+			android:layout_marginStart="@dimen/spacing_xtiny"
+			android:layout_marginBottom="@dimen/spacing_small"
+			android:text="@string/buy"
+			android:textSize="@dimen/text_normal" />
+
+		<TextView
+			android:id="@+id/item0_des"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/item0"
+			android:layout_alignParentStart="true"
+			android:layout_toStartOf="@id/btn_premium"
+			android:text="@string/pro_premium_msg"
+			android:textAppearance="@style/TextAppearance.DialogContent"
+			android:textColor="@color/md_black_1000"
+			android:textSize="@dimen/text_normal" />
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingStart="@dimen/spacing_small"
+		android:paddingLeft="@dimen/spacing_small"
+		android:paddingEnd="@dimen/spacing_small"
+		android:paddingRight="@dimen/spacing_small">
+
+
+		<TextView
+			android:id="@+id/item2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/pro_all_features"
+			android:textAppearance="@style/TextAppearance.DialogContent"
+			android:textColor="@color/md_black_1000"
+			android:textSize="@dimen/text_xmedium"
+			android:textStyle="bold" />
+
+		<Button
+			android:id="@+id/btn_all_features"
+			style="@style/Widget.RaisedButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/item2"
+			android:layout_alignParentEnd="true"
+			android:layout_marginStart="@dimen/spacing_xtiny"
+			android:layout_marginBottom="@dimen/spacing_small"
+			android:text="@string/buy"
+			android:textSize="@dimen/text_normal" />
+
+		<TextView
+			android:id="@+id/item2_des"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/item2"
+			android:layout_alignParentStart="true"
+			android:layout_toStartOf="@id/btn_all_features"
+			android:text="@string/pro_all_features_msg"
+			android:textAppearance="@style/TextAppearance.DialogContent"
+			android:textColor="@color/md_black_1000"
+			android:textSize="@dimen/text_normal" />
+
+	</RelativeLayout>
+
+	<RelativeLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:paddingStart="@dimen/spacing_normal"
+		android:paddingLeft="@dimen/spacing_small"
+		android:paddingEnd="@dimen/spacing_normal"
+		android:paddingRight="@dimen/spacing_small">
+
+		<TextView
+			android:id="@+id/item1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/pro_no_ads"
+			android:textAppearance="@style/TextAppearance.DialogContent"
+			android:textColor="@color/md_black_1000"
+			android:textSize="@dimen/text_xmedium"
+			android:textStyle="bold" />
+
+		<Button
+			android:id="@+id/btn_no_ads"
+			style="@style/Widget.RaisedButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/item1"
+			android:layout_alignParentEnd="true"
+			android:layout_marginStart="@dimen/spacing_xtiny"
+			android:layout_marginBottom="@dimen/spacing_small"
+			android:text="@string/buy"
+			android:textSize="@dimen/text_normal" />
+
+		<TextView
+			android:id="@+id/item1_des"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@id/item1"
+			android:layout_alignParentStart="true"
+			android:layout_toStartOf="@id/btn_no_ads"
+			android:text="@string/pro_no_ads_msg"
+			android:textAppearance="@style/TextAppearance.DialogContent"
+			android:textColor="@color/md_black_1000"
+			android:textSize="@dimen/text_normal" />
+
+
+	</RelativeLayout>
+
+
+	<TextView
+		android:id="@+id/text_explain"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:gravity="start"
+		android:text="@string/pro_explain_msg"
+		android:textColor="@color/darkTextColor"
+		android:textSize="10sp" />
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="@dimen/spacing_normal"
+		android:gravity="end"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/dialog_positive_btn"
+			style="@style/Widget.RaisedButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/spacing_small"
+			android:paddingStart="@dimen/spacing_normal"
+			android:paddingLeft="@dimen/spacing_normal"
+			android:paddingEnd="@dimen/spacing_normal"
+			android:paddingRight="@dimen/spacing_normal"
+			android:text="@string/btn_ok"
+			android:textSize="@dimen/text_normal" />
+
+	</LinearLayout>
+</LinearLayout>
