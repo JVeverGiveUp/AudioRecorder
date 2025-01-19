@@ -1078,8 +1078,10 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 		} else if (requestCode == REQ_CODE_RECORD_AUDIO && grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			if (checkStoragePermission2()) {
-				//presenter.startRecording(getApplicationContext());
-				startAudioRecording();
+				if(checkNotificationPermission()) {
+					//presenter.startRecording(getApplicationContext());
+					startAudioRecording();
+				}
 			}
 		}else if (requestCode == REQ_CODE_POST_NOTIFICATIONS && grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {

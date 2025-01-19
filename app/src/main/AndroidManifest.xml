@@ -134,9 +134,7 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/app_id_ads" />
 
-        <service android:name="com.ptdstudio.internalsoundrecorder.app.ProcessMp3Service"
-            android:exported="false"
-            android:foregroundServiceType="dataSync"/>
+
     </application>
 
 </manifest>
