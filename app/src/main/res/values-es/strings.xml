@@ -175,4 +175,58 @@
 		Version %s
 	]]></string>
 	<!--<a href="http://#/">Application site</a>-->
+
+	<string name="moving_records_success_and_fail_count">%d registros movidos exitosamente y %d fallaron al mover</string>
+
+	<string name="move_record_success">%s movido al directorio privado de la aplicación</string>
+	<plurals name="downloading_failed_count">
+		<item quantity="one">No se pudo copiar %d registro</item>
+		<item quantity="other">No se pudieron copiar %d registros</item>
+	</plurals>
+	<plurals name="move_records_failed_count">
+		<item quantity="one">No se pudo mover %d registro</item>
+		<item quantity="other">No se pudieron mover %d registros</item>
+	</plurals>
+	<string name="record_will_be_copied_into_downloads">El registro será copiado al directorio \'Descargas\'</string>
+	<string name="move_record_failed">No se pudo mover: %s</string>
+	<string name="downloading_failed_file_already_exists">No se pudo copiar. Ya existe un archivo con el nombre %s</string>
+
+	<string name="view">Ver</string>
+	<string name="view_records">Ver registros</string>
+	<string name="move_records_needed">Mover registros necesarios</string>
+	<string name="moving_record">Moviendo registro: %s</string>
+	<string name="moving_record_cancel">Movimiento cancelado</string>
+	<string name="move_records_info">Algunos de tus registros aún están almacenados en el almacenamiento público. Pronto, el almacenamiento público dejará de estar disponible para la aplicación. Necesitamos mover esos registros al directorio privado de la aplicación.</string>
+	<string name="info_format"><b>Formato M4a</b> está codificado con el códec de audio AAC, tiene buena calidad y tamaño pequeño. <b>(recomendado)</b>
+	\n<b>Wav</b> es un formato de datos de audio sin comprimir. Ocupa mucho más espacio que otros formatos. Es necesario para casos específicos.
+	\n<b>3gp</b> es un formato contenedor multimedia desarrollado para servicios de telecomunicaciones móviles. Úsalo si necesitas ahorrar espacio.
+	</string>
+	<string name="info_frequency"><b>Tasa de muestreo</b> es la cantidad de muestras de audio que se procesan por segundo.
+	\n<b>48kHz</b> es la tasa de muestreo utilizada para los DVDs.
+	\n<b>44,1kHz</b> es la tasa de muestreo de los CD de audio. <b>(recomendado)</b>
+	\n<b>22kHz</b> tasa de muestreo popular para tasas de bits bajas como 64 kbps.
+	\n<b>8kHz</b> la tasa de muestreo tiene menos ancho de banda que los sistemas telefónicos modernos. No es adecuado para grabaciones serias.
+	</string>
+	<string name="info_bitrate"><b>Bitrate</b> es el tamaño de los datos por segundo de sonido. Afecta directamente a la calidad y tamaño de la grabación.
+	\n<b>256 kbps</b> bitrate de buena calidad.
+	\n<b>192 kbps</b> bitrate de calidad media.
+	\n<b>128 kbps</b> calidad de bitrate media. Bitrate común para podcasts. <b>(recomendado)</b>
+	\n<b>96 kbps</b> generalmente utilizado para discurso o streaming de baja calidad.
+	\n<b>48 kbps</b> generalmente aceptable solo para discurso.
+	</string>
+	<string name="info_channels">
+	<b>Estéreo</b> se graban dos canales separados. Esto significa que cada altavoz estéreo tiene una señal de sonido diferente. <b>(recomendado)</b>
+	\n<b>Mono</b> se graba un solo canal de señal. Puede ser reproducido a través de varios altavoces, pero todos los altavoces reproducen la misma copia de la señal.
+	</string>
+	<string name="move_records">Mover %d registros</string>
+	<string name="move_public_storage_records_message">Es necesario mover los registros del almacenamiento público</string>
+	<string name="later">Más tarde</string>
+	<string name="move">Mover</string>
+	<string name="move_all">Mover todo</string>
+
+	<string name="button_record">Grabar</string>
+	<string name="button_stop">Pausar</string>
+	<string name="button_resume">Reanudar</string>
+	<string name="button_finish">Detener</string>
+
 </resources>

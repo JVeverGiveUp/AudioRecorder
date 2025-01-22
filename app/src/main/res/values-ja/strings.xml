@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">オーディオレコーダー</string>
+
+    <string name="records">私の録音</string>
+    <string name="settings">設定</string>
+    <string name="setup">セットアップ</string>
+    <string name="welcome_1">シンプルで高速なアプリケーションへようこそ</string>
+    <string name="title_1">オーディオレコーダー</string>
+    <string name="rate_app">アプリを評価</string>
+    <string name="store_records_public">録音をパブリックディレクトリに保存</string>
+    <string name="record_in_stereo">ステレオ録音</string>
+    <string name="keep_screen_on">録音中は画面をONに保つ</string>
+    <string name="total_duration">総録音時間: %s</string>
+    <string name="total_record_count">総録音数: %d</string>
+    <string name="available_space">使用可能なスペース: %s</string>
+    <string name="delete_all">すべての録音を削除</string>
+    <string name="delete_all2">すべて削除</string>
+    <string name="records_was_removed">一部の録音ファイルが録音ディレクトリに見つかりませんでした。おそらく削除されたか、移動された可能性があります。</string>
+    <string name="title_file_is_not_available">録音ファイルにアクセスできません！</string>
+    <string name="details_file_is_not_available">残念ながら、アプリはもはやAndroidのパブリックストレージにアクセスできません。\n録音ファイルは次の場所にあります:\n%s</string>
+    <string name="warning">警告！</string>
+    <string name="delete_this_record">この録音を削除しますか？</string>
+    <string name="delete_record">%sをゴミ箱に移動しますか？</string>
+    <string name="delete_record_forever">録音%sを永久に削除しますか？</string>
+    <plurals name="delete_selected_records">
+        <item quantity="one">%d個の選択された録音をゴミ箱に移動しますか？</item>
+        <item quantity="other">%d個の選択された録音をゴミ箱に移動しますか？</item>
+    </plurals>
+    <plurals name="download_selected_records">
+        <item quantity="one">選択した%d件の録音を「ダウンロード」ディレクトリにコピーしますか？</item>
+        <item quantity="other">選択した%d件の録音を「ダウンロード」ディレクトリにコピーしますか？</item>
+    </plurals>
+    <string name="start_recording">録音を開始</string>
+    <string name="recording_feature_disabled">録音機能が無効</string>
+    <string name="restore_record">録音%sを復元しますか？</string>
+    <string name="delete_all_records">すべての録音を削除しますか？</string>
+    <string name="all_records_deleted">すべての録音が正常に削除されました</string>
+    <string name="failed_to_delete_all_records">すべての録音を削除できませんでした</string>
+    <string name="please_select_record_to_share">共有する録音を選択してください</string>
+    <string name="record_name">新しい名前</string>
+    <string name="recording">録音中: %s</string>
+    <string name="recording_is_on">録音中</string>
+    <string name="recording_progress">録音中&#8230;</string>
+    <string name="recording_paused">一時停止中</string>
+    <string name="playback">再生中: %s</string>
+    <string name="zero_time">00:00</string>
+    <string name="empty">空</string>
+    <string name="selected"> %d件選択済み</string>
+    <string name="no_records">録音は空です</string>
+    <string name="no_bookmarks">お気に入りは空です</string>
+    <string name="bookmarks">お気に入り</string>
+    <string name="share_record">録音を共有: %s</string>
+    <plurals name="share_records_count">
+        <item quantity="one">%d件の録音を共有</item>
+        <item quantity="other">%d件の録音を共有</item>
+    </plurals>
+    <string name="import_progress">オーディオファイルのインポート&#8230;</string>
+    <string name="btn_import">インポート</string>
+    <string name="processing_canceled">処理がキャンセルされました</string>
+    <string name="record_calculation">波形計算&#8230;</string>
+    <string name="record_processing">波形描画計算&#8230;</string>
+    <string name="request">リクエストまたはフィードバック</string>
+    <string name="email_clients_not_found">メールクライアントが見つかりません</string>
+    <string name="send_email">メールで送信&#8230;</string>
+    <string name="open_record_with">%sで録音を開く</string>
+    <string name="delete">削除</string>
+    <string name="restore">復元</string>
+    <string name="info">情報</string>
+    <string name="rename">名前を変更</string>
+    <string name="dont_ask_again">再度聞かない</string>
+    <string name="open_with">以下で開く&#8230;</string>
+    <string name="save_as">名前を付けて保存&#8230;</string>
+    <string name="downloading">ダウンロード中: %s</string>
+    <plurals name="downloading_success_count">
+        <item quantity="one">%d件の録音が正常にコピーされました</item>
+        <item quantity="other">%d件の録音が正常にコピーされました</item>
+    </plurals>
+    <plurals name="move_records_success_count">
+        <item quantity="one">%d件の録音が正常に移動されました</item>
+        <item quantity="other">%d件の録音が正常に移動されました</item>
+    </plurals>
+    <string name="downloading_success_and_fail_count">%d件の録音がコピーされ、%d件のコピーに失敗しました</string>
+    <string name="moving_records_success_and_fail_count">%d件の録音が移動され、%d件の移動に失敗しました</string>
+    <string name="downloading_success">%sが「ダウンロード」ディレクトリにコピーされました</string>
+    <string name="move_record_success">%sがアプリのプライベートディレクトリに移動されました</string>
+    <plurals name="downloading_failed_count">
+        <item quantity="one">%d件の録音のコピーに失敗しました</item>
+        <item quantity="other">%d件の録音のコピーに失敗しました</item>
+    </plurals>
+    <plurals name="move_records_failed_count">
+        <item quantity="one">%d件の録音の移動に失敗しました</item>
+        <item quantity="other">%d件の録音の移動に失敗しました</item>
+    </plurals>
+    <string name="record_will_be_copied_into_downloads">録音は「ダウンロード」ディレクトリにコピーされます</string>
+    <string name="move_record_failed">移動に失敗しました: %s</string>
+    <string name="downloading_failed">コピーに失敗しました: %s</string>
+    <string name="downloading_failed_file_already_exists">コピーに失敗しました。名前%sのファイルはすでに存在します</string>
+    <string name="downloading_cancel">コピーがキャンセルされました</string>
+    <string name="share">共有</string>
+    <string name="ask_to_rename">録音後に名前変更ダイアログを表示</string>
+    <string name="record_moved_into_trash">録音がゴミ箱に移動されました</string>
+    <string name="selected_records_moved_into_trash">選択された録音がゴミ箱に移動されました</string>
+    <string name="all_records_deleted_successfully">すべての録音が正常に削除されました</string>
+    <string name="record_deleted_successfully">録音が正常に削除されました</string>
+    <string name="record_restored_successfully">録音が正常に復元されました</string>
+    <string name="record_imported_successfully">録音が正常にインポートされました</string>
+    <string name="cant_import_files">ファイルをインポートできません</string>
+    <string name="by_date">日付順 (新しい順)</string>
+    <string name="by_date_desc">日付順 (古い順)</string>
+    <string name="by_name">名前順 (A-Z)</string>
+    <string name="by_name_desc">名前順 (Z-A)</string>
+    <string name="by_duration">時間順 (長い順)</string>
+    <string name="by_duration_desc">時間順 (短い順)</string>
+    <string name="need_write_permission">アプリにはパブリックストレージへのアクセス許可が必要です。許可されていない場合、録音はアプリのプライベートディレクトリに保存されます</string>
+    <string name="rec_name">名前:</string>
+    <string name="rec_format">形式:</string>
+    <string name="rec_duration">期間:</string>
+    <string name="rec_frequency">周波数:</string>
+    <string name="rec_size">サイズ:</string>
+    <string name="rec_created">作成日時:</string>
+    <string name="rec_location">ファイルの場所:</string>
+    <string name="naming">名前付け:</string>
+    <string name="private_dir_warning">記録はアプリのプライベートディレクトリに保存され、他のアプリからは見えません</string>
+    <string name="public_dir_warning">記録はデバイスの共通ディレクトリに保存され、他のアプリから見える可能性があります</string>
+    <string name="lost_records">失われた記録</string>
+    <string name="trash">ゴミ箱</string>
+    <string name="trash_info">ゴミ箱に移動した記録は60日後に自動的に完全に削除されます。</string>
+    <string name="file_browser">ファイルブラウザ</string>
+    <string name="private_dir">プライベートディレクトリ</string>
+    <string name="public_dir">パブリックディレクトリ</string>
+    <string name="found_in_the_app">アプリ内に見つかりました</string>
+    <string name="not_found_in_the_app">アプリ内に見つかりませんでした</string>
+    <string name="in_trash">ゴミ箱内</string>
+
+    <string name="app_settings">アプリ設定:</string>
+    <string name="recording_settings">録音設定:</string>
+    <string name="other_settings">その他:</string>
+
+    <string name="today">今日</string>
+    <string name="yesterday">昨日</string>
+
+    <string name="btn_save">保存</string>
+    <string name="btn_cancel">キャンセル</string>
+    <string name="btn_yes">はい</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_no">いいえ</string>
+    <string name="btn_play">再生</string>
+    <string name="btn_deny">拒否</string>
+    <string name="btn_allow">許可</string>
+    <string name="btn_details">詳細</string>
+    <string name="btn_get_started">始める</string>
+    <string name="btn_apply">適用</string>
+    <string name="btn_reset">リセット</string>
+    <string name="btn_next">次へ</string>
+    <string name="view">表示</string>
+    <string name="view_records">記録を見る</string>
+    <string name="move_records_needed">記録を移動する必要があります</string>
+    <string name="moving_record">記録を移動中: %s</string>
+    <string name="moving_record_cancel">移動がキャンセルされました</string>
+    <string name="move_records_info">一部の記録はパブリックストレージに保存されています。近日中にパブリックストレージがアプリで利用できなくなります。そのため、これらの記録をアプリのプライベートディレクトリに移動する必要があります。</string>
+    <string name="info_format"><b>M4a</b>フォーマットはAACオーディオコーデックで圧縮されており、良好な品質と小さなサイズです。<b>(推奨)</b>
+	\n<b>Wav</b>は非圧縮オーディオデータフォーマットで、他のフォーマットよりも多くのスペースを必要とします。特定のケースで必要です。
+	\n<b>3gp</b>はモバイル通信サービス用に開発されたマルチメディアコンテナフォーマットです。スペースを節約したい場合に使用します。
+</string>
+    <string name="info_frequency"><b>サンプルレート</b>は1秒間にキャプチャされるオーディオのサンプル数です。
+	\n<b>48kHz</b>はDVDで使用されるサンプルレートです。
+	\n<b>44,1kHz</b>はオーディオCDのサンプリングレートです。<b>(推奨)</b>
+	\n<b>22kHz</b>は低ビットレート向けの一般的なサンプルレートです。
+	\n <b>8kHz</b>は現代の電話システムよりも帯域幅が少なく、真剣な録音には不適切です。
+</string>
+    <string name="info_bitrate"><b>ビットレート</b>は1秒あたりのデータサイズで、録音の品質とサイズに直接影響します。
+	\n<b>256 kbps</b>は良好な品質のビットレートです。
+	\n<b>192 kbps</b>は中程度の品質のビットレートです。
+	\n<b>128 kbps</b>は中間品質のビットレートです。ポッドキャストに一般的なビットレートです。<b>(推奨)</b>
+	\n<b>96 kbps</b>は一般的にスピーチや低品質のストリーミングに使用されます。
+	\n<b>48 kbps</b>はスピーチには一般的に許容されます。
+</string>
+    <string name="info_channels">
+	<b>ステレオ</b>は2つの別々のチャネルが録音されます。これは、各ステレオスピーカーが異なる音声信号を持っていることを意味します。<b>(推奨)</b>
+	\n<b>モノ</b>は1つの信号チャネルが録音されます。複数のスピーカーで再生できますが、すべてのスピーカーは同じ信号のコピーを再生します。
+</string>
+    <string name="info_3gp"><b>3gp</b>はモバイル通信サービス用に開発されたマルチメディアコンテナフォーマットです。スペースを節約したい場合に使用します。</string>
+    <string name="info_m4a"><b>M4a</b>フォーマットはAACオーディオコーデックで圧縮されており、良好な品質と小さなサイズです。<b>(推奨)</b></string>
+    <string name="info_wav"><b>Wav</b>は非圧縮オーディオデータフォーマットで、他のフォーマットよりも多くのスペースを必要とします。特定のケースで必要です。</string>
+    <string name="info_stereo"><b>ステレオ</b>は2つの別々のチャネルが録音されます。これは、各ステレオスピーカーが異なる音声信号を持っていることを意味します。<b>(推奨)</b></string>
+    <string name="info_mono"><b>モノ</b>は1つの信号チャネルが録音されます。複数のスピーカーで再生できますが、すべてのスピーカーは同じ信号のコピーを再生します。</string>
+    <string name="info_bitrate_48"><b>48 kbps</b>はスピーチ用に一般的に許容されます。</string>
+    <string name="info_bitrate_96"><b>96 kbps</b>はスピーチや低品質のストリーミングに一般的に使用されます。</string>
+    <string name="info_bitrate_128"><b>128 kbps</b>は中間品質のビットレートです。ポッドキャストに一般的なビットレートです。<b>(推奨)</b></string>
+    <string name="info_bitrate_192"><b>192 kbps</b>は中程度の品質のビットレートです。</string>
+    <string name="info_bitrate_256"><b>256 kbps</b>は良好な品質のビットレートです。</string>
+    <string name="info_bitrate_288"><b>288 kbps</b>は非常に良い品質のビットレートです。</string>
+    <string name="info_sample_rate_8k"><b>8kHz</b>は現代の電話システムよりも帯域幅が少なく、真剣な録音には不適切です。</string>
+    <string name="info_sample_rate_16k"><b>16kHz</b>は8kHzよりも優れています。</string>
+    <string name="info_sample_rate_22k"><b>22kHz</b>は低ビットレート向けの一般的なサンプルレートです。</string>
+    <string name="info_sample_rate_32k"><b>32kHz</b>は22kHzよりも少し優れています。</string>
+    <string name="info_sample_rate_44k"><b>44,1kHz</b>はオーディオCDのサンプリングレートです。<b>(推奨)</b></string>
+    <string name="info_sample_rate_48k"><b>48kHz</b>はDVDで使用されるサンプルレートです。</string>
+    <string name="recording_format">録音フォーマット:</string>
+    <string name="bitrate">ビットレート:</string>
+    <string name="channels">チャネル数:</string>
+    <string name="sample_rate">サンプルレート:</string>
+    <string name="size_per_min">%s Mb/分の予想サイズ</string>
+    <string name="value_hz">%d Hz</string>
+    <string name="value_kbps">%d kbps</string>
+    <string name="stereo">ステレオ</string>
+    <string name="mono">モノ</string>
+    <string name="records_location">記録の場所:\n%s</string>
+    <string name="feature_not_available_in_android_10">この機能はAndroid 10以降では利用できません。</string>
+    <string name="size">%s Mb</string>
+    <string name="move_records">%d件の記録を移動</string>
+
+    <string name="error_unknown">予期しないエラー</string>
+    <string name="error_cant_create_file">ファイルを作成できません</string>
+    <string name="error_failed_to_start_recording">録音の開始に失敗しました</string>
+    <string name="error_invalid_output_file">無効な出力ファイル</string>
+    <string name="error_file_exists">同じ名前のファイルがすでに存在します!</string>
+    <string name="error_failed_to_rename">記録の名前変更に失敗しました!</string>
+    <string name="error_failed_to_init_recorder">レコーダーの初期化に失敗しました</string>
+    <string name="error_failed_to_init_player">プレーヤーの初期化に失敗しました</string>
+    <string name="error_player_data_source">プレーヤーはファイルを読み取れません</string>
+    <string name="error_unable_to_read_sound_file">サウンドファイルを読み取れません</string>
+    <string name="error_permission_denied">権限が拒否されました</string>
+    <string name="error_process_waveform">波形を描画できません</string>
+    <string name="error_lost_records">一部の記録が削除または移動されました</string>
+    <string name="error_no_available_space">空き容量がありません!</string>
+    <string name="error_failed_access_to_storage">ストレージへのアクセスに失敗しました</string>
+    <string name="error_on_recording">録音エラー!</string>
+    <string name="error_failed_to_restore">記録の復元に失敗しました!</string>
+    <string name="error_failed_to_delete">記録の削除に失敗しました!</string>
+
+    <string name="move_public_storage_records_message">パブリックストレージの記録を移動する必要があります</string>
+    <string name="later">後で</string>
+    <string name="move">移動</string>
+    <string name="move_all">すべて移動</string>
+
+    <string name="button_record">録音</string>
+    <string name="button_stop">一時停止</string>
+    <string name="button_resume">再開</string>
+    <string name="button_finish">停止</string>
+    <string name="about_body"><![CDATA[
+    <b>オーディオレコーダー 2023</b><br>
+    バージョン %s
+]]></string>
+    <!--<a href="http://#/">アプリケーションサイト</a>-->
+
+    <string-array name="theme_colors2">
+        <item>テーマ 青灰色</item>
+        <item>テーマ 黒</item>
+        <item>テーマ ティール</item>
+        <item>テーマ 青</item>
+        <item>テーマ 紫</item>
+        <item>テーマ ピンク</item>
+        <item>テーマ オレンジ</item>
+        <item>テーマ 赤</item>
+        <item>テーマ 茶色</item>
+    </string-array>
+    <string-array name="channels">
+        <item>ステレオ</item>
+        <item>モノラル</item>
+    </string-array>
+
+    <string name="app_widget_description">録音開始ウィジェット</string>
+
+    <string name="processing_mp3">mp3ファイル %s を処理中</string>
+    <string name="internal_audio">内部音声を使用中（マイクを使用する場合は無効にしてください）</string>
+    <string name="do_you_stop">録音を停止しますか？</string>
+    <string name="detail_message_stop">設定に移動して現在の録音をキャンセルします</string>
+    <string name="buy_premium">プレミアムバージョンを購入</string>
+    <string name="pro_premium">プレミアムバージョン</string>
+    <string name="pro_premium_msg">\t* すべての機能をアンロック\n\t* 広告なし</string>
+    <string name="pro_explain_msg">これは一度だけ購入するもので、購入した内容への無制限アクセスを提供します</string>
+    <string name="pro_unlock_title">すべての機能をアンロック</string>
+    <string name="pro_no_ads">広告なし</string>
+    <string name="pro_no_ads_msg">\t* すべての広告を削除\n\t* 広告はもう表示されません</string>
+    <string name="pro_all_features">すべての機能をアンロック</string>
+    <string name="pro_all_features_msg">\t* 内部音声録音の設定をアンロック\n\t* ステレオでwav/mp3録音オプションをカスタマイズ\n\t* 録音品質を最大256 kbpsに設定\n\t* サンプルレート、ビットレート、チャンネル数をカスタマイズ</string>
+    <string name="buy">購入</string>
+    <string name="pro_notice">以下のオプションはプレミアムバージョンのみです。購入するか、デフォルト設定を使用してください！</string>
+    <string name="audio_source_notice">内部音声：デバイスからの音のみ、一部のアプリではサポートされない場合があります\nマイク：マイクからの音、常にサポートされていますが、ノイズが発生することがあります</string>
+    <string name="pro_version">アンロック：プレミアムバージョン</string>
+    <string name="privacy">プライバシーポリシー</string>
+
+</resources>

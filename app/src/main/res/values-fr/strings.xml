@@ -250,34 +250,30 @@
 		<item>Thème Marron</item>
 	</string-array>
 
-	<string-array name="formats2">
-		<item>M4a</item>
-		<item>Wav</item>
-		<item>3gp</item>
-	</string-array>
-
-	<string-array name="bit_rates2">
-		<item>48 kbps</item>
-		<item>96 kbps</item>
-		<item>128 kbps</item>
-		<item>192 kbps</item>
-		<item>256 kbps</item>
-		<item>288 kbps</item>
-	</string-array>
-
-	<string-array name="sample_rates2">
-		<item>8 kHz</item>
-		<item>16 kHz</item>
-		<item>22 kHz</item>
-		<item>32 kHz</item>
-		<item>44.1 kHz</item>
-		<item>48 kHz</item>
-	</string-array>
-
 	<string-array name="channels">
 		<item>Stéréo</item>
 		<item>Mono</item>
 	</string-array>
+
+	<string name="processing_mp3">Traitement du fichier mp3 %s</string>
+	<string name="internal_audio">Utilisation de l\'audio interne (Si désactivé, utilisez le Micro)</string>
+	<string name="do_you_stop">Voulez-vous arrêter l\'enregistrement ?</string>
+	<string name="detail_message_stop">Allez dans les paramètres et annulez également l\'enregistrement audio actuel</string>
+	<string name="buy_premium">Achetez la version Premium</string>
+	<string name="pro_premium">Version Premium</string>
+	<string name="pro_premium_msg">\t* Déverrouillez toutes les fonctionnalités\n\t* Sans publicité</string>
+	<string name="pro_explain_msg">Il s\'agit d\'un achat unique qui vous donne un accès illimité à ce que vous avez acheté</string>
+	<string name="pro_unlock_title">Déverrouiller toutes les fonctionnalités</string>
+	<string name="pro_no_ads">Sans publicité</string>
+	<string name="pro_no_ads_msg">\t* Supprimer toutes les publicités\n\t* Plus de publicités</string>
+	<string name="pro_all_features">Déverrouiller toutes les fonctionnalités</string>
+	<string name="pro_all_features_msg">\t* Déverrouiller les paramètres de l\'enregistrement audio interne\n\t* Personnalisez les options d\'enregistrement wav/mp3 avec stéréo\n\t* Qualité d\'enregistrement jusqu\'à 256 kbps\n\t* Personnalisez la fréquence d\'échantillonnage, le débit binaire, le nombre de canaux</string>
+	<string name="buy">Acheter</string>
+	<string name="pro_notice">Les options ci-dessous sont réservées à la version premium. Veuillez acheter ou utiliser les paramètres par défaut !</string>
+	<string name="audio_source_notice">Audio interne : Son provenant uniquement de l\'appareil, mais certaines applications peuvent ne pas le supporter\nMicrophone : Son provenant du microphone, toujours pris en charge mais peut avoir du bruit</string>
+	<string name="pro_version">Déverrouiller : Version Premium</string>
+	<string name="privacy">Politique de confidentialité</string>
+
 
 	<string name="app_widget_description">Widget début d\'enregistrement</string>
 </resources>

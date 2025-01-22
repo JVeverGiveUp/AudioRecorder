@@ -245,11 +245,6 @@
 		<item>Tema Vermell</item>
 		<item>Tema Marró</item>
 	</string-array>
-	<string-array name="formats2">
-		<item>M4a</item>
-		<item>Wav</item>
-		<item>3gp</item>
-	</string-array>
 	<string-array name="bit_rates2">
 		<!--		<item>24 kbps</item>-->
 		<item>48 kbps</item>

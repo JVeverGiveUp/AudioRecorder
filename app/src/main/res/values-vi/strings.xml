@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Máy ghi âm</string>
+
+    <string name="records">Ghi âm của tôi</string>
+    <string name="settings">Cài đặt</string>
+    <string name="setup">Cài đặt</string>
+    <string name="welcome_1">Chào mừng bạn đến với ứng dụng ghi âm đơn giản và nhanh chóng</string>
+    <string name="title_1">Máy ghi âm</string>
+    <string name="rate_app">Đánh giá ứng dụng</string>
+    <string name="store_records_public">Lưu ghi âm vào thư mục ngoài</string>
+    <string name="record_in_stereo">Ghi âm ở chế độ Stereo</string>
+    <string name="keep_screen_on">Giữ màn hình sáng khi ghi âm</string>
+    <string name="total_duration">Tổng thời gian ghi âm: %s</string>
+    <string name="total_record_count">Tổng số ghi âm: %d</string>
+    <string name="available_space">Dung lượng còn lại: %s</string>
+    <string name="delete_all">Xóa tất cả ghi âm</string>
+    <string name="delete_all2">Xóa tất cả</string>
+    <string name="records_was_removed">Một số tệp ghi âm không tìm thấy trong thư mục ghi âm. Có thể chúng đã bị xóa hoặc di chuyển.</string>
+    <string name="title_file_is_not_available">Không thể truy cập tệp ghi âm!</string>
+    <string name="details_file_is_not_available">Rất tiếc, ứng dụng không còn quyền truy cập vào bộ nhớ ngoài Android.\nBạn có thể tìm tệp ghi âm trên điện thoại của mình tại vị trí này:\n%s</string>
+    <string name="warning">Cảnh báo!</string>
+    <string name="delete_this_record">Xóa ghi âm này?</string>
+    <string name="delete_record">Di chuyển vào thùng rác %s?</string>
+    <string name="delete_record_forever">Xóa ghi âm %s mãi mãi?</string>
+    <plurals name="delete_selected_records">
+        <item quantity="one">Di chuyển vào thùng rác %d ghi âm đã chọn?</item>
+        <item quantity="other">Di chuyển vào thùng rác %d ghi âm đã chọn?</item>
+    </plurals>
+    <plurals name="download_selected_records">
+        <item quantity="one">Sao chép %d ghi âm đã chọn vào thư mục \'Tải về\'?</item>
+        <item quantity="other">Sao chép %d ghi âm đã chọn vào thư mục \'Tải về\'?</item>
+    </plurals>
+    <string name="start_recording">Bắt đầu ghi âm</string>
+    <string name="recording_feature_disabled">Tính năng ghi âm đã bị tắt</string>
+    <string name="restore_record">Khôi phục ghi âm %s?</string>
+    <string name="delete_all_records">Xóa tất cả ghi âm?</string>
+    <string name="all_records_deleted">Tất cả ghi âm đã được xóa thành công</string>
+    <string name="failed_to_delete_all_records">Xóa tất cả ghi âm không thành công</string>
+    <string name="please_select_record_to_share">Vui lòng chọn ghi âm để chia sẻ</string>
+    <string name="record_name">Tên mới</string>
+    <string name="recording">Đang ghi âm: %s</string>
+    <string name="recording_is_on">Ghi âm đang bật</string>
+    <string name="recording_progress">Đang ghi âm...</string>
+    <string name="recording_paused">Tạm dừng</string>
+    <string name="playback">Phát lại: %s</string>
+    <string name="zero_time">00:00</string>
+    <string name="empty">Rỗng</string>
+    <string name="selected"> %d đã chọn</string>
+    <string name="no_records">Không có ghi âm</string>
+    <string name="no_bookmarks">Danh sách yêu thích trống</string>
+    <string name="bookmarks">Danh sách yêu thích</string>
+    <string name="share_record">Chia sẻ ghi âm: %s</string>
+    <plurals name="share_records_count">
+        <item quantity="one">Chia sẻ %d ghi âm</item>
+        <item quantity="other">Chia sẻ %d ghi âm</item>
+    </plurals>
+    <string name="import_progress">Đang nhập tệp âm thanh...</string>
+    <string name="btn_import">Nhập khẩu</string>
+    <string name="processing_canceled">Quá trình đã bị hủy</string>
+    <string name="record_calculation">Đang tính toán sóng âm...</string>
+    <string name="record_processing">Đang vẽ sóng âm...</string>
+    <string name="request">Yêu cầu hoặc phản hồi</string>
+    <string name="email_clients_not_found">Không tìm thấy ứng dụng Email nào</string>
+    <string name="send_email">Gửi qua email...</string>
+    <string name="open_record_with">Mở %s với</string>
+    <string name="delete">Xóa</string>
+    <string name="restore">Khôi phục</string>
+    <string name="info">Thông tin</string>
+    <string name="rename">Đổi tên</string>
+    <string name="dont_ask_again">Đừng hỏi lại</string>
+    <string name="open_with">Mở với…</string>
+    <string name="save_as">Lưu thành…</string>
+    <string name="downloading">Đang tải xuống: %s</string>
+    <plurals name="downloading_success_count">
+        <item quantity="one">Đã sao chép %d ghi âm thành công</item>
+        <item quantity="other">Đã sao chép %d ghi âm thành công</item>
+    </plurals>
+    <plurals name="move_records_success_count">
+        <item quantity="one">Đã di chuyển %d ghi âm thành công</item>
+        <item quantity="other">Đã di chuyển %d ghi âm thành công</item>
+    </plurals>
+    <string name="downloading_success_and_fail_count">%d ghi âm sao chép thành công và %d thất bại khi sao chép</string>
+    <string name="moving_records_success_and_fail_count">%d ghi âm di chuyển thành công và %d thất bại khi di chuyển</string>
+    <string name="downloading_success">%s đã sao chép vào thư mục \'Tải về\'</string>
+    <string name="move_record_success">%s đã di chuyển vào thư mục riêng của ứng dụng</string>
+    <plurals name="downloading_failed_count">
+        <item quantity="one">Sao chép %d ghi âm thất bại</item>
+        <item quantity="other">Sao chép %d ghi âm thất bại</item>
+    </plurals>
+    <plurals name="move_records_failed_count">
+        <item quantity="one">Di chuyển %d ghi âm thất bại</item>
+        <item quantity="other">Di chuyển %d ghi âm thất bại</item>
+    </plurals>
+    <string name="record_will_be_copied_into_downloads">Ghi âm sẽ được sao chép vào thư mục \'Tải về\'</string>
+    <string name="move_record_failed">Di chuyển thất bại: %s</string>
+    <string name="downloading_failed">Sao chép thất bại: %s</string>
+    <string name="downloading_failed_file_already_exists">Sao chép thất bại. Tệp có tên %s đã tồn tại</string>
+    <string name="downloading_cancel">Sao chép bị hủy</string>
+    <string name="share">Chia sẻ</string>
+    <string name="ask_to_rename">Hiển thị hộp thoại đổi tên sau khi ghi âm hoàn tất</string>
+    <string name="record_moved_into_trash">Ghi âm đã di chuyển vào thùng rác</string>
+    <string name="selected_records_moved_into_trash">Ghi âm đã chọn di chuyển vào thùng rác</string>
+    <string name="all_records_deleted_successfully">Tất cả ghi âm đã xóa thành công</string>
+    <string name="record_deleted_successfully">Ghi âm đã xóa thành công</string>
+    <string name="record_restored_successfully">Ghi âm đã khôi phục thành công</string>
+    <string name="record_imported_successfully">Ghi âm đã nhập thành công</string>
+    <string name="cant_import_files">Không thể nhập tệp</string>
+    <string name="by_date">Theo ngày (mới nhất)</string>
+    <string name="by_date_desc">Theo ngày (cũ nhất)</string>
+    <string name="by_name">Theo tên (A-Z)</string>
+    <string name="by_name_desc">Theo tên (Z-A)</string>
+    <string name="by_duration">Theo thời gian (dài nhất)</string>
+    <string name="by_duration_desc">Theo thời gian (ngắn nhất)</string>
+    <string name="need_write_permission">Ứng dụng yêu cầu quyền truy cập vào bộ nhớ ngoài. Nếu không được phép, ghi âm sẽ được lưu trong thư mục riêng của ứng dụng</string>
+
+    <string name="rec_name">Tên:</string>
+    <string name="rec_format">Định dạng:</string>
+    <string name="rec_duration">Thời lượng:</string>
+    <string name="rec_frequency">Tần số:</string>
+    <string name="rec_size">Kích thước:</string>
+    <string name="rec_created">Ngày tạo:</string>
+    <string name="rec_location">Vị trí tệp:</string>
+    <string name="naming">Đặt tên:</string>
+    <string name="private_dir_warning">Bản ghi sẽ được lưu trong thư mục riêng của ứng dụng và không hiển thị cho ứng dụng khác</string>
+    <string name="public_dir_warning">Bản ghi sẽ được lưu trong thư mục chung trên thiết bị của bạn và có thể hiển thị cho các ứng dụng khác</string>
+    <string name="lost_records">Bản ghi đã mất</string>
+    <string name="trash">Thùng rác</string>
+    <string name="trash_info">Các bản ghi bị chuyển vào thùng rác sẽ tự động bị xóa sau 60 ngày.</string>
+    <string name="file_browser">Trình duyệt tệp</string>
+    <string name="private_dir">Thư mục riêng</string>
+    <string name="public_dir">Thư mục công khai</string>
+    <string name="found_in_the_app">Tìm thấy trong ứng dụng</string>
+    <string name="not_found_in_the_app">Không tìm thấy trong ứng dụng</string>
+    <string name="in_trash">Trong thùng rác</string>
+
+    <string name="app_settings">Cài đặt ứng dụng:</string>
+    <string name="recording_settings">Cài đặt ghi âm:</string>
+    <string name="other_settings">Khác:</string>
+
+    <string name="today">Hôm nay</string>
+    <string name="yesterday">Hôm qua</string>
+
+    <string name="btn_save">Lưu</string>
+    <string name="btn_cancel">Hủy</string>
+    <string name="btn_yes">Có</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_no">Không</string>
+    <string name="btn_play">Phát</string>
+    <string name="btn_deny">Từ chối</string>
+    <string name="btn_allow">Cho phép</string>
+    <string name="btn_details">Chi tiết</string>
+    <string name="btn_get_started">Bắt đầu</string>
+    <string name="btn_apply">Áp dụng</string>
+    <string name="btn_reset">Đặt lại</string>
+    <string name="btn_next">Tiếp theo</string>
+    <string name="view">Xem</string>
+    <string name="view_records">Xem bản ghi</string>
+    <string name="move_records_needed">Cần di chuyển bản ghi</string>
+    <string name="moving_record">Đang di chuyển bản ghi: %s</string>
+    <string name="moving_record_cancel">Hủy di chuyển</string>
+    <string name="move_records_info">Một số bản ghi của bạn vẫn được lưu trong bộ nhớ công khai. Sắp tới, bộ nhớ công khai sẽ không còn khả dụng cho ứng dụng. Chúng tôi cần di chuyển các bản ghi đó vào thư mục riêng của ứng dụng.</string>
+
+    <string name="info_format"><b>M4a</b> được mã hóa bằng codec âm thanh AAC, có chất lượng tốt và dung lượng nhỏ. <b>(khuyến nghị)</b>
+	\n<b>Wav</b> là định dạng âm thanh không nén, chiếm nhiều dung lượng hơn so với các định dạng khác. Chỉ nên sử dụng trong một số trường hợp đặc biệt.
+	\n<b>3gp</b> là định dạng đa phương tiện dành cho dịch vụ viễn thông di động. Hãy sử dụng nếu bạn cần tiết kiệm dung lượng.
+</string>
+
+    <string name="info_frequency"><b>Tần số lấy mẫu</b> là số mẫu âm thanh được thu mỗi giây.
+	\n<b>48kHz</b> là tần số lấy mẫu được sử dụng cho đĩa DVD.
+	\n<b>44,1kHz</b> là tần số lấy mẫu của đĩa CD âm thanh. <b>(khuyến nghị)</b>
+	\n<b>22kHz</b> phổ biến cho âm thanh có bitrate thấp như 64 kbps.
+	\n<b>8kHz</b> có băng thông thấp hơn cả hệ thống điện thoại hiện đại. Không phù hợp cho bất kỳ nhiệm vụ ghi âm nghiêm túc nào.
+</string>
+
+    <string name="info_bitrate"><b>Bitrate</b> là lượng dữ liệu được sử dụng mỗi giây để lưu âm thanh, ảnh hưởng trực tiếp đến chất lượng ghi âm và dung lượng tệp.
+	\n<b>256 kbps</b> có chất lượng tốt.
+	\n<b>192 kbps</b> có chất lượng trung bình.
+	\n<b>128 kbps</b> chất lượng tầm trung, phổ biến cho podcast. <b>(khuyến nghị)</b>
+	\n<b>96 kbps</b> thường dùng cho giọng nói hoặc phát trực tuyến chất lượng thấp.
+	\n<b>48 kbps</b> chỉ chấp nhận được cho giọng nói.
+</string>
+
+    <string name="info_channels">
+	<b>Stereo</b> ghi hai kênh âm thanh riêng biệt. Mỗi loa sẽ phát một tín hiệu khác nhau. <b>(khuyến nghị)</b>
+	\n<b>Mono</b> ghi một kênh âm thanh duy nhất. Khi phát ra, tất cả loa sẽ phát cùng một tín hiệu.
+</string>
+
+    <string name="recording_format">Định dạng ghi âm:</string>
+    <string name="bitrate">Bitrate:</string>
+    <string name="channels">Số kênh:</string>
+    <string name="sample_rate">Tần số lấy mẫu:</string>
+    <string name="size_per_min">%s Mb/phút (kích thước dự kiến)</string>
+    <string name="value_hz">%d Hz</string>
+    <string name="value_kbps">%d kbps</string>
+    <string name="stereo">Stereo</string>
+    <string name="mono">Mono</string>
+    <string name="records_location">Vị trí bản ghi:\n%s</string>
+    <string name="feature_not_available_in_android_10">Tính năng này không còn khả dụng trên Android 10 hoặc cao hơn.</string>
+    <string name="size">%s Mb</string>
+    <string name="move_records">Di chuyển %d bản ghi</string>
+
+    <string name="error_unknown">Lỗi không xác định</string>
+    <string name="error_cant_create_file">Không thể tạo tệp</string>
+    <string name="error_failed_to_start_recording">Không thể bắt đầu ghi âm</string>
+    <string name="error_invalid_output_file">Tệp đầu ra không hợp lệ</string>
+    <string name="error_file_exists">Tệp có tên này đã tồn tại!</string>
+    <string name="error_failed_to_rename">Không thể đổi tên bản ghi!</string>
+    <string name="error_failed_to_delete">Không thể xóa bản ghi!</string>
+
+    <string name="button_record">Ghi Âm</string>
+    <string name="button_stop">Tạm dừng</string>
+    <string name="button_resume">Tiếp tục</string>
+    <string name="button_finish">Dừng</string>
+
+    <string name="about_body"><![CDATA[
+    	<b>Trình ghi âm 2023</b><br>
+		Phiên bản %s
+]]></string>
+
+    <string-array name="theme_colors2">
+        <item>Chủ đề Xám Xanh</item>
+        <item>Chủ đề Đen</item>
+        <item>Chủ đề Xanh Lục</item>
+        <item>Chủ đề Xanh Dương</item>
+        <item>Chủ đề Tím</item>
+        <item>Chủ đề Hồng</item>
+        <item>Chủ đề Cam</item>
+        <item>Chủ đề Đỏ</item>
+        <item>Chủ đề Nâu</item>
+    </string-array>
+
+    <string name="app_widget_description">Bắt đầu ghi âm bằng tiện ích</string>
+
+    <string name="processing_mp3">Đang xử lý tệp mp3 %s</string>
+    <string name="internal_audio">Ghi âm âm thanh hệ thống (Nếu tắt, sẽ dùng micro)</string>
+    <string name="do_you_stop">Bạn có muốn dừng ghi âm không?</string>
+    <string name="detail_message_stop">Đi tới cài đặt để hủy ghi âm hiện tại</string>
+    <string name="buy_premium">Mua phiên bản Premium</string>
+    <string name="pro_premium">Phiên bản Premium</string>
+    <string name="pro_premium_msg">\t* Mở khóa tất cả tính năng\n\t* Không có quảng cáo</string>
+    <string name="pro_explain_msg">Đây là giao dịch mua một lần duy nhất, mang lại quyền truy cập không giới hạn vào những gì bạn đã mua</string>
+    <string name="pro_unlock_title">Mở khóa tất cả tính năng</string>
+    <string name="pro_no_ads">Không có quảng cáo</string>
+    <string name="pro_no_ads_msg">\t* Loại bỏ tất cả quảng cáo\n\t* Không còn quảng cáo nữa</string>
+    <string name="pro_all_features">Mở khóa tất cả tính năng</string>
+    <string name="pro_all_features_msg">\t* Mở cài đặt ghi âm âm thanh nội bộ\n\t* Tùy chỉnh ghi âm wav/mp3 với âm thanh stereo\n\t* Chất lượng ghi âm lên đến 256 kbps\n\t* Tùy chỉnh tần số lấy mẫu, bitrate, số kênh</string>
+    <string name="buy">Mua</string>
+    <string name="pro_notice">Các tùy chọn bên dưới chỉ dành cho phiên bản Premium. Vui lòng mua hoặc sử dụng cài đặt mặc định!</string>
+    <string name="audio_source_notice">Âm thanh hệ thống: Chỉ thu âm từ bên trong điện thoại, nhưng một số ứng dụng có thể không hỗ trợ\nMicro: Thu âm từ micro, luôn hỗ trợ nhưng có thể có tạp âm</string>
+    <string name="pro_version">Mở khóa: Phiên bản Premium</string>
+    <string name="privacy">Chính sách quyền riêng tư</string>
+
+
+</resources>

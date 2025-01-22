@@ -258,14 +258,14 @@
 		<item>Theme Brown</item>
 	</string-array>
 
-	<string-array name="formats2">
+	<string-array name="formats2" translatable="false">
 		<item>M4a</item>
 		<item>Wav</item>
 		<item>3gp</item>
 		<item>Mp3</item>
 	</string-array>
 
-	<string-array name="bit_rates2">
+	<string-array name="bit_rates2" translatable="false">
 <!--		<item>24 kbps</item>-->
 		<item>48 kbps</item>
 		<item>96 kbps</item>
@@ -275,7 +275,7 @@
 		<item>288 kbps</item>
 	</string-array>
 
-	<string-array name="sample_rates2">
+	<string-array name="sample_rates2" translatable="false">
 		<item>8kHz</item>
 		<item>16kHz</item>
 		<item>22kHz</item>

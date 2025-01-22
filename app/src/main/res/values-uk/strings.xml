@@ -272,11 +272,6 @@
 		<item>Тема Коричнева</item>
 	</string-array>
 
-	<string-array name="formats2">
-		<item>M4a</item>
-		<item>Wav</item>
-		<item>3gp</item>
-	</string-array>
 
 	<string-array name="bit_rates2">
 <!--		<item>24 кбіт/с</item>-->

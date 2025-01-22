@@ -252,31 +252,6 @@
 		<item>Kahverengi Tema</item>
 	</string-array>
 
-	<string-array name="formats2">
-		<item>M4a</item>
-		<item>Wav</item>
-		<item>3gp</item>
-	</string-array>
-
-	<string-array name="bit_rates2">
-<!--		<item>24 kbps</item>-->
-		<item>48 kbps</item>
-		<item>96 kbps</item>
-		<item>128 kbps</item>
-		<item>192 kbps</item>
-		<item>256 kbps</item>
-		<item>288 kbps</item>
-	</string-array>
-
-	<string-array name="sample_rates2">
-		<item>8kHz</item>
-		<item>16kHz</item>
-		<item>22kHz</item>
-		<item>32kHz</item>
-		<item>44.1kHz</item>
-		<item>48kHz</item>
-	</string-array>
-
 	<string-array name="channels">
 		<item>Stereo</item>
 		<item>Mono</item>

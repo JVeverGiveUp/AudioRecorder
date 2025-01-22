@@ -39,5 +39,6 @@ public class ProVersionManager {
     }
     public boolean isAllFeatures(){
         return preferences.getBoolean(KEY_ALL_FEATURES, false);
+//        return true;
     }
 }
