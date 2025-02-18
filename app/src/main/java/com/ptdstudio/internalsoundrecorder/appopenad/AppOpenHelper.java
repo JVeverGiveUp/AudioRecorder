@@ -42,7 +42,7 @@ public class AppOpenHelper implements Application.ActivityLifecycleCallbacks, De
         if(ARApplication.Companion.getInstance().getProVersionManager().isNoAdsVersion())
             return false;
         if(System.currentTimeMillis() - adPreferences.getLong(SAVED_TIME_AD, 0) < ADS_TIME) {
-            Log.d("TestTag", "Ad has been just showed");
+            Log.d("TestTag", "Ad has  been just showed");
             return false;
         }
         return true;
