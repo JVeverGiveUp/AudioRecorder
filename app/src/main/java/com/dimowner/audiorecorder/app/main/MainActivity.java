@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.media.projection.MediaProjectionConfig;
 import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -96,7 +97,18 @@ public class MainActivity extends Activity implements MainContract.View, View.On
 	static final int MEDIA_PROJECTION_REQUEST_CODE = 113;
 	void startMediaProjectionRequest(){
 		MediaProjectionManager mediaProjectionManager = (MediaProjectionManager) getApplicationContext().getSystemService(Context.MEDIA_PROJECTION_SERVICE);
-		startActivityForResult(mediaProjectionManager.createScreenCaptureIntent(), MEDIA_PROJECTION_REQUEST_CODE);
+
+		Intent screenCaptureIntent;
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) { // API 34 = Android 14
+			// Android 14+: Mặc định Entire screen, ẩn option Share one app
+			MediaProjectionConfig config = MediaProjectionConfig.createConfigForDefaultDisplay();
+			screenCaptureIntent = mediaProjectionManager.createScreenCaptureIntent(config);
+		} else {
+			// Android 13 trở xuống: Cách cũ, dialog chỉ hỏi capture toàn màn hình
+			screenCaptureIntent = mediaProjectionManager.createScreenCaptureIntent();
+		}
+		startActivityForResult(screenCaptureIntent, MEDIA_PROJECTION_REQUEST_CODE);
 	}
 
 	public static class CustomHandler extends Handler {

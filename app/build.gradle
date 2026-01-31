@@ -14,8 +14,6 @@ android {
 	defaultConfig {
 		minSdkVersion 29
 		targetSdkVersion 34
-		versionCode 935
-		versionName "0.9.99"
 
 //		externalNativeBuild {
 //			cmake {

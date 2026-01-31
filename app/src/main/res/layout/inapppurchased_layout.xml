@@ -6,9 +6,9 @@
 	android:layout_height="wrap_content"
 	android:background="@color/white"
 	android:orientation="vertical"
-	android:paddingStart="@dimen/spacing_normal"
+	android:paddingStart="@dimen/spacing_small"
 	android:paddingTop="@dimen/spacing_xnormal"
-	android:paddingEnd="@dimen/spacing_normal"
+	android:paddingEnd="@dimen/spacing_small"
 	android:paddingBottom="@dimen/spacing_normal">
 
 	<TextView
@@ -25,11 +25,7 @@
 
 	<RelativeLayout
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:paddingStart="@dimen/spacing_small"
-		android:paddingLeft="@dimen/spacing_small"
-		android:paddingEnd="@dimen/spacing_small"
-		android:paddingRight="@dimen/spacing_small">
+		android:layout_height="wrap_content">
 
 
 		<TextView
@@ -44,7 +40,7 @@
 
 		<Button
 			android:id="@+id/btn_premium"
-			style="@style/Widget.RaisedButton"
+			style="@style/Widget.IAPButton"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_below="@id/item0"
@@ -70,11 +66,7 @@
 
 	<RelativeLayout
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:paddingStart="@dimen/spacing_small"
-		android:paddingLeft="@dimen/spacing_small"
-		android:paddingEnd="@dimen/spacing_small"
-		android:paddingRight="@dimen/spacing_small">
+		android:layout_height="wrap_content">
 
 
 		<TextView
@@ -115,11 +107,7 @@
 
 	<RelativeLayout
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:paddingStart="@dimen/spacing_normal"
-		android:paddingLeft="@dimen/spacing_small"
-		android:paddingEnd="@dimen/spacing_normal"
-		android:paddingRight="@dimen/spacing_small">
+		android:layout_height="wrap_content">
 
 		<TextView
 			android:id="@+id/item1"

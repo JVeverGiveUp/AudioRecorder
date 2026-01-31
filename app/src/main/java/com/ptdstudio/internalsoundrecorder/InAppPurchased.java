@@ -22,6 +22,7 @@ import com.android.billingclient.api.QueryPurchasesParams;
 import com.dimowner.audiorecorder.ARApplication;
 import com.ptdstudio.internalsoundrecorder.util.ProVersionManager;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -110,12 +111,12 @@ public class InAppPurchased implements PurchasesUpdatedListener {
                                 @Override
                                 public void onQueryPurchasesResponse(@NonNull BillingResult _billingResult, @NonNull List<Purchase> purchaseList) {
                                     //list is null, no product was purchased
-                                    if (purchaseList.isEmpty()) {
-                                        //disable all pro features first
-                                        ARApplication.Companion.getInstance().getProVersionManager().setAllFeatures(false);
-                                        ARApplication.Companion.getInstance().getProVersionManager().setNoAds(false);
-                                        return;
-                                    }
+//                                    if (purchaseList.isEmpty()) {
+//                                        //disable all pro features first
+//                                        ARApplication.Companion.getInstance().getProVersionManager().setAllFeatures(false);
+//                                        ARApplication.Companion.getInstance().getProVersionManager().setNoAds(false);
+//                                        return;
+//                                    }
                                     for (Purchase purchase : purchaseList){
                                         if (purchase.getPurchaseState() == Purchase.PurchaseState.PURCHASED) {
                                             //save result here
@@ -131,10 +132,54 @@ public class InAppPurchased implements PurchasesUpdatedListener {
                                     }
                                 }
                             });
+                    //query price of each products
+                    queryProductPrices();
 
                 }
             }
         });
+    }
+
+
+    private void queryProductPrices() {
+        List<QueryProductDetailsParams.Product> products = Arrays.asList(
+                QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId(InAppPurchased.ITEM_PREMIUM)
+                        .setProductType(BillingClient.ProductType.INAPP)
+                        .build(),
+
+                QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId(InAppPurchased.ITEM_NO_ADS)
+                        .setProductType(BillingClient.ProductType.INAPP)
+                        .build(),
+                QueryProductDetailsParams.Product.newBuilder()
+                        .setProductId(InAppPurchased.ITEM_ALL_FEATURES)
+                        .setProductType(BillingClient.ProductType.INAPP)
+                        .build()
+        );
+
+        QueryProductDetailsParams params =
+                QueryProductDetailsParams.newBuilder()
+                        .setProductList(products)
+                        .build();
+
+        mBillingClient.queryProductDetailsAsync(params,
+                (billingResult, productDetailsList) -> {
+                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                        cacheProductDetails(productDetailsList);
+                    }
+                });
+    }
+
+    private void cacheProductDetails(List<ProductDetails> list) {
+        for (ProductDetails details : list) {
+            ProductDetails.OneTimePurchaseOfferDetails price = details.getOneTimePurchaseOfferDetails();
+            String formatPrice = "BUY";
+            if(price != null)
+                formatPrice = price.getFormattedPrice();
+            String productId = details.getProductId();
+            ARApplication.Companion.getInstance().getProVersionManager().setPrice(productId, formatPrice);
+        }
     }
 
     public void purchased(Activity activity, String productId) {

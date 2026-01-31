@@ -16,7 +16,7 @@
 
 <resources>
 
-	<style name="AppTheme" parent="@android:style/Theme.Material">
+	<style name="AppTheme" parent="Theme.AppCompat.WindowOptOutEdgeToEdge">
 		<item name="android:colorPrimary">@color/md_blue_gray_700</item>
 		<item name="android:colorPrimaryDark">@color/md_blue_gray_700</item>
 		<item name="android:colorAccent">@color/md_yellow_A700</item>
@@ -28,6 +28,10 @@
 		<item name="android:windowBackground">@drawable/gradient_gray</item>
 
 		<item name="android:navigationBarColor">@color/md_blue_gray_700</item>
+	</style>
+
+	<style name="Theme.AppCompat.WindowOptOutEdgeToEdge" parent="@android:style/Theme.Material">
+		<!-- Attribute windowOptOutEdgeToEdgeEnforcement is override in values-v35 -->
 	</style>
 
 	<style name="AppTheme.Blue" parent="AppTheme">
@@ -102,6 +106,19 @@
 		<item name="android:textSize">@dimen/text_xmedium</item>
 		<item name="android:paddingStart">@dimen/spacing_double</item>
 		<item name="android:paddingEnd">@dimen/spacing_double</item>
+		<item name="android:paddingTop">@dimen/spacing_medium</item>
+		<item name="android:paddingBottom">@dimen/spacing_medium</item>
+	</style>
+	<style name="Widget.IAPButton" parent="@android:style/Widget.Material.Button">
+		<item name="android:textStyle">bold</item>
+		<item name="android:textColor">#414141</item>
+		<item name="android:background">@drawable/raised_button_background</item>
+		<item name="android:fontFamily">sans-serif</item>
+		<item name="android:letterSpacing">0.025</item>
+		<item name="android:textAllCaps">false</item>
+		<item name="android:textSize">@dimen/text_xmedium</item>
+		<item name="android:paddingStart">@dimen/spacing_medium</item>
+		<item name="android:paddingEnd">@dimen/spacing_medium</item>
 		<item name="android:paddingTop">@dimen/spacing_medium</item>
 		<item name="android:paddingBottom">@dimen/spacing_medium</item>
 	</style>
