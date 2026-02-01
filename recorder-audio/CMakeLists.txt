@@ -1,60 +1,63 @@
-# For more information about using CMake with Android Studio, read the
-# documentation: https://d.android.com/studio/projects/add-native-code.html
+# =====================================================
+# CMakeLists.txt
+# Support Android 15+ (16KB memory page size)
+# =====================================================
 
-# Sets the minimum version of CMake required to build the native library.
+cmake_minimum_required(VERSION 3.22.1)
 
-cmake_minimum_required(VERSION 3.4.1)
+project(mp3recorder)
 
-# Creates and names a library, sets it as either STATIC
-# or SHARED, and provides the relative paths to its source code.
-# You can define multiple libraries, and CMake builds them for you.
-# Gradle automatically packages shared libraries with your APK.
+# -----------------------------------------------------
+# Global linker flags - REQUIRED for Android 15+
+# -----------------------------------------------------
+set(CMAKE_SHARED_LINKER_FLAGS
+        "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,max-page-size=16384")
 
+# -----------------------------------------------------
+# Path config
+# -----------------------------------------------------
 set(LIBMP3_DIR ${CMAKE_SOURCE_DIR}/libs)
 
-add_library( mp3lame
-             SHARED
-             IMPORTED )
+# -----------------------------------------------------
+# Prebuilt libmp3lame
+# -----------------------------------------------------
+add_library(mp3lame SHARED IMPORTED)
 
-set_target_properties( mp3lame
-                       PROPERTIES
-                       IMPORTED_LOCATION ${LIBMP3_DIR}/${ANDROID_ABI}/libmp3lame.so)
+set_target_properties(mp3lame PROPERTIES
+        IMPORTED_LOCATION
+        ${LIBMP3_DIR}/${ANDROID_ABI}/libmp3lame.so
+)
 
-include_directories(libs/include)
+# -----------------------------------------------------
+# Include headers
+# -----------------------------------------------------
+include_directories(
+        ${CMAKE_SOURCE_DIR}/libs/include
+)
 
-add_library( # Sets the name of the library.
-             mp3recorder
+# -----------------------------------------------------
+# Build mp3recorder
+# -----------------------------------------------------
+add_library(mp3recorder SHARED
+        src/main/cpp/lame_util.c
+)
 
-             # Sets the library as a shared library.
-             SHARED
+# -----------------------------------------------------
+# Android system libs
+# -----------------------------------------------------
+find_library(log-lib log)
 
-             # Provides a relative path to your source file(s).
-              src/main/cpp/lame_util.c)
+# -----------------------------------------------------
+# Link libraries
+# -----------------------------------------------------
+target_link_libraries(mp3recorder
+        mp3lame
+        ${log-lib}
+)
 
-
-
-# Searches for a specified prebuilt library and stores the path as a
-# variable. Because CMake includes system libraries in the search path by
-# default, you only need to specify the name of the public NDK library
-# you want to add. CMake verifies that the library exists before
-# completing its build.
-
-find_library( # Sets the name of the path variable.
-              log-lib
-
-              # Specifies the name of the NDK library that
-              # you want CMake to locate.
-              log )
-
-# Specifies libraries CMake should link to your target library. You
-# can link multiple libraries, such as libraries you define in this
-# build script, prebuilt third-party libraries, or system libraries.
-
-target_link_libraries( # Specifies the target library.
-                       mp3recorder
-
-                       mp3lame
-
-                       # Links the target library to the log library
-                       # included in the NDK.
-                       ${log-lib} )
+# -----------------------------------------------------
+# Target-level linker flag (double safety)
+# -----------------------------------------------------
+target_link_options(mp3recorder PRIVATE
+        -Wl,-z,max-page-size=16384
+)
