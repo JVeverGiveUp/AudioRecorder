@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AppCompat.WindowOptOutEdgeToEdge" parent="@android:style/Theme.Material">
+        <!-- Attribute windowOptOutEdgeToEdgeEnforcement is override in values-v35 -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>
